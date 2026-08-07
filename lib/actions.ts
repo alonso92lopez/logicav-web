@@ -27,7 +27,7 @@ export async function submitQuote(
   }
 
   const lead = {
-    fecha: new Date().toISOString(),
+    fecha: new Date().toLocaleString("es-CL", { timeZone: "America/Santiago" }),
     nombre,
     organizacion: String(formData.get("organizacion") ?? "").trim(),
     email,
@@ -40,9 +40,20 @@ export async function submitQuote(
     mensaje: String(formData.get("mensaje") ?? "").trim(),
   };
 
-  // TODO [POR DEFINIR]: envío del lead por correo (p. ej. Resend) o notificación
-  // a WhatsApp. Por ahora queda registrado en el log del servidor.
+  // Respaldo en logs además del correo
   console.log("[LOGICAV] Nueva solicitud de cotización:", lead);
+
+  try {
+    const { sendLeadEmail } = await import("./send-lead");
+    await sendLeadEmail(lead);
+  } catch (err) {
+    console.error("[LOGICAV] Error enviando lead por correo:", err);
+    return {
+      status: "error",
+      message:
+        "No pudimos registrar tu solicitud en este momento. Escríbenos directo por WhatsApp al +56 9 8706 6666 y te atendemos igual.",
+    };
+  }
 
   return {
     status: "ok",
