@@ -60,11 +60,13 @@ Para la siguiente iteración conseguir:
 - 2–3 proyectos reales: foto propia, comuna, tipo de instalación, alcance.
 - Clientes referenciables (solo con autorización escrita).
 
-## 7. Formulario
+## 7. Formulario — ✅ RESUELTO (7 ago 2026)
 
-Los leads hoy **solo quedan en el log del servidor** (`lib/actions.ts`).
-Antes de lanzar hay que conectar el envío real (correo a contacto@logicav.cl
-o notificación). Definir también quién responde y en cuánto tiempo.
+Los leads llegan por correo a `contactologicav@gmail.com` (vía Resend, como
+`cotizaciones@logicav.cl`), con respuesta directa al solicitante. La casilla
+`contacto@logicav.cl` también recibe (Cloudflare Email Routing + catch-all) y
+puede responder como el dominio. Destino configurable en la variable
+`LEAD_TO_EMAIL` de Vercel. Pendiente definir: quién responde y en cuánto tiempo.
 
 ## 8. Precios de equipos (`/equipos`)
 
