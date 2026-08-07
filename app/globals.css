@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
+/*
+  Paleta A — "Azul ingeniería"
+  Tema claro único. El navy sale del chevrón del logo.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #ffffff;
+  --mist: #f6f8fa;
+  --line: #e5e9ee;
+  --ink: #1d2b38;
+  --ink-soft: #4b5d6e;
+  --ink-faint: #8494a3;
+  --accent: #0a66e8;
+  --accent-dark: #0852bc;
+  --accent-soft: #eaf1fd;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-soft: var(--accent-soft);
+  --font-display: var(--font-inter-tight);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Etiqueta técnica: kicker de sección */
+.kicker {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Numeración técnica grande (metodología) */
+.step-num {
+  font-family: var(--font-plex-mono), monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fallback si JS está degradado: todo visible, sin transforms pendientes */
+.no-js [data-reveal],
+.no-js [data-reveal-item] {
+  opacity: 1 !important;
+  transform: none !important;
 }

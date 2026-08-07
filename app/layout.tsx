@@ -1,10 +1,55 @@
 import type { Metadata } from "next";
+import { Inter, Inter_Tight, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  variable: "--font-inter-tight",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+});
+
 export const metadata: Metadata = {
-  title: "LOGICAV | Climatización e ingeniería",
+  // [POR VALIDAR] dominio definitivo
+  metadataBase: new URL("https://logicav.cl"),
+  title: {
+    default:
+      "LOGICAV — Mantención y climatización para empresas | Santiago, RM",
+    template: "%s | LOGICAV",
+  },
   description:
-    "Instalación, mantención y soluciones de climatización para empresas y sector público.",
+    "Mantención preventiva y correctiva, instalación y proyectos de climatización para empresas, edificios e instituciones en la Región Metropolitana. Informe técnico y trazabilidad por equipo.",
+  keywords: [
+    "mantención aire acondicionado empresas",
+    "climatización Santiago",
+    "mantención preventiva HVAC",
+    "instalación aire acondicionado comercial",
+    "contrato de mantención climatización",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "es_CL",
+    siteName: "LOGICAV",
+    title: "LOGICAV — Mantención y climatización para empresas",
+    description:
+      "Instalación, mantención preventiva y correctiva de climatización para empresas, edificios e instituciones. Región Metropolitana.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -13,8 +58,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body>{children}</body>
+    <html
+      lang="es"
+      className={`no-js ${inter.variable} ${interTight.variable} ${plexMono.variable}`}
+    >
+      <body>
+        {/* Quita el flag no-js apenas hay JS: los reveals solo se activan con JS presente */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.remove('no-js')`,
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
