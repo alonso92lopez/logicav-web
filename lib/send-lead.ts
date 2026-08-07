@@ -29,7 +29,7 @@ export async function sendLeadEmail(lead: Lead): Promise<void> {
   if (!apiKey) throw new Error("RESEND_API_KEY no configurada");
 
   const domain = process.env.RESEND_EMAIL_DOMAIN ?? "logicav.cl";
-  const to = process.env.LEAD_TO_EMAIL ?? "alonso.lopez.logicav@gmail.com";
+  const to = process.env.LEAD_TO_EMAIL ?? "contactologicav@gmail.com";
 
   const subject = `Cotización web: ${lead.nombre}${
     lead.organizacion ? ` (${lead.organizacion})` : ""
