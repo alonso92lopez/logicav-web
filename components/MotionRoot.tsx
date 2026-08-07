@@ -25,7 +25,8 @@ export function MotionRoot() {
 
       gsap.registerPlugin(ScrollTrigger);
 
-      const lenis = new Lenis({ lerp: 0.12 });
+      // anchors: Lenis maneja los links #ancla (el smooth CSS nativo choca con él)
+      const lenis = new Lenis({ lerp: 0.12, anchors: { offset: -96 } });
       lenis.on("scroll", ScrollTrigger.update);
       const tick = (time: number) => lenis.raf(time * 1000);
       gsap.ticker.add(tick);

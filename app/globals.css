@@ -42,6 +42,12 @@ html {
   }
 }
 
+/* Con Lenis activo (agrega la clase .lenis al html), el smooth nativo
+   compite con su animación y anula los saltos a #anclas */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 body {
   background: var(--paper);
   color: var(--ink);

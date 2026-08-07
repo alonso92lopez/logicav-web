@@ -71,14 +71,14 @@ export const services = [
 ];
 
 export const plans = {
-  note: "Valores referenciales por equipo. El contrato se cotiza según catastro de equipos, criticidad y frecuencia de uso.",
+  note: "Valores referenciales netos (+ IVA) por equipo. El contrato se cotiza según catastro de equipos, criticidad y frecuencia de uso.",
   items: [
     {
       id: "preventivo",
       name: "Preventivo",
       tagline: "Para instalaciones estables que necesitan orden y respaldo.",
       price: "Desde $35.000", // dato real del catálogo actual
-      priceUnit: "por equipo / visita",
+      priceUnit: "por equipo / visita, + IVA",
       features: [
         { label: "Visitas programadas", value: "2 al año" }, // [POR VALIDAR]
         { label: "Pauta e informe técnico por visita", value: "Incluido" },
@@ -93,7 +93,7 @@ export const plans = {
       name: "Preventivo + Correctivo",
       tagline: "Para operaciones que no pueden esperar una cotización por cada falla.",
       price: "Desde $55.000", // [POR VALIDAR]
-      priceUnit: "por equipo / visita",
+      priceUnit: "por equipo / visita, + IVA",
       features: [
         { label: "Visitas programadas", value: "4 al año" }, // [POR VALIDAR]
         { label: "Pauta e informe técnico por visita", value: "Incluido" },

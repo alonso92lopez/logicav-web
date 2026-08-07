@@ -34,9 +34,9 @@ export default function EquiposPage() {
           </h1>
           <p className="mt-5 leading-8 text-ink-soft" data-reveal>
             Split muro inverter de 9.000 a 24.000 BTU de Anwo, Midea y Clark.
-            Los valores son referenciales por unidad: para recambios o
-            ampliaciones de parque cotizamos según cantidad, instalación y plan
-            de mantención asociado.
+            Los valores son referenciales por unidad, netos (+ IVA): para
+            recambios o ampliaciones de parque cotizamos según cantidad,
+            instalación y plan de mantención asociado.
           </p>
           <div className="mt-7 flex flex-wrap gap-3" data-reveal>
             <Link
@@ -99,7 +99,8 @@ export default function EquiposPage() {
                         <div className="flex justify-between">
                           <dt className="text-ink-faint">Valor referencial</dt>
                           <dd className="font-mono font-medium">
-                            {formatCLP(p.precioReferencia)}
+                            {formatCLP(p.precioReferencia)}{" "}
+                            <span className="text-xs font-normal text-ink-faint">+ IVA</span>
                           </dd>
                         </div>
                       </dl>
