@@ -71,135 +71,47 @@ export function QuoteForm() {
           />
         </div>
         <div>
-          <label htmlFor="q-org" className={labelCls}>
-            Empresa o institución
+          <label htmlFor="q-contacto" className={labelCls}>
+            Teléfono o correo *
           </label>
           <input
-            id="q-org"
-            name="organizacion"
-            autoComplete="organization"
-            className={inputCls}
-            placeholder="Nombre de la organización"
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="q-email" className={labelCls}>
-            Correo *
-          </label>
-          <input
-            id="q-email"
-            name="email"
-            type="email"
+            id="q-contacto"
+            name="contacto"
             required
-            autoComplete="email"
             className={inputCls}
-            placeholder="nombre@empresa.cl"
+            placeholder="+56 9 … o nombre@empresa.cl"
           />
-        </div>
-        <div>
-          <label htmlFor="q-fono" className={labelCls}>
-            Teléfono
-          </label>
-          <input
-            id="q-fono"
-            name="telefono"
-            type="tel"
-            autoComplete="tel"
-            className={inputCls}
-            placeholder="+56 9 …"
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="q-tipo" className={labelCls}>
-            Tipo de instalación
-          </label>
-          <select id="q-tipo" name="tipo_instalacion" className={inputCls} defaultValue="">
-            <option value="" disabled>
-              Selecciona una opción
-            </option>
-            {formOptions.installationTypes.map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="q-cant" className={labelCls}>
-            Cantidad de equipos
-          </label>
-          <select id="q-cant" name="cantidad_equipos" className={inputCls} defaultValue="">
-            <option value="" disabled>
-              Selecciona un rango
-            </option>
-            {formOptions.equipmentCounts.map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="q-servicio" className={labelCls}>
-            Servicio que necesitas
-          </label>
-          <select
-            id="q-servicio"
-            name="servicio"
-            className={inputCls}
-            defaultValue=""
-            ref={serviceRef}
-          >
-            <option value="" disabled>
-              Selecciona el servicio
-            </option>
-            {formOptions.serviceTypes.map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="q-urgencia" className={labelCls}>
-            Urgencia
-          </label>
-          <select id="q-urgencia" name="urgencia" className={inputCls} defaultValue="">
-            <option value="" disabled>
-              ¿Para cuándo?
-            </option>
-            {formOptions.urgencies.map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
         </div>
       </div>
 
       <div>
-        <label htmlFor="q-comuna" className={labelCls}>
-          Comuna
+        <label htmlFor="q-servicio" className={labelCls}>
+          Servicio <span className="font-normal text-ink-faint">(opcional)</span>
         </label>
-        <input
-          id="q-comuna"
-          name="comuna"
+        <select
+          id="q-servicio"
+          name="servicio"
           className={inputCls}
-          placeholder="Ej: Providencia"
-        />
+          defaultValue=""
+          ref={serviceRef}
+        >
+          <option value="">Selecciona el servicio</option>
+          {formOptions.serviceTypes.map((t) => (
+            <option key={t}>{t}</option>
+          ))}
+        </select>
       </div>
 
       <div>
         <label htmlFor="q-msg" className={labelCls}>
-          Cuéntanos brevemente qué necesitas
+          ¿Qué necesitas?
         </label>
         <textarea
           id="q-msg"
           name="mensaje"
           rows={4}
           className={inputCls}
-          placeholder="Ej: tenemos 8 equipos split en oficinas y necesitamos un contrato de mantención…"
+          placeholder="Ej: tenemos 8 equipos split en oficinas en Providencia y necesitamos un contrato de mantención…"
         />
       </div>
 
@@ -221,6 +133,18 @@ export function QuoteForm() {
           Respondemos dentro del horario hábil ({contact.hours.toLowerCase()}).
         </p>
       </div>
+
+      <p className="text-sm text-ink-soft">
+        ¿Prefieres escribirnos directo?{" "}
+        <a
+          href={contact.whatsapp}
+          target="_blank"
+          rel="noreferrer"
+          className="font-semibold text-ink underline decoration-line underline-offset-4 transition-colors hover:text-accent"
+        >
+          Háblanos por WhatsApp
+        </a>
+      </p>
     </form>
   );
 }

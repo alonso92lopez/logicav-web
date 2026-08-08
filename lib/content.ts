@@ -346,15 +346,6 @@ export const products: Product[] = [
 ];
 
 export const formOptions = {
-  installationTypes: [
-    "Oficina",
-    "Local comercial",
-    "Edificio residencial",
-    "Industria / bodega",
-    "Institución pública",
-    "Otro",
-  ],
-  equipmentCounts: ["1 a 3", "4 a 10", "11 a 30", "Más de 30", "No lo sé aún"],
   serviceTypes: [
     "Contrato de mantención",
     "Mantención por una vez",
@@ -362,11 +353,6 @@ export const formOptions = {
     "Instalación de equipos",
     "Proyecto / obra nueva",
     "Compra de equipos",
-  ],
-  urgencies: [
-    "Urgente: equipo detenido",
-    "Esta semana",
-    "Estoy planificando",
   ],
 };
 
