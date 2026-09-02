@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight, IBM_Plex_Mono } from "next/font/google";
+import { Barlow_Condensed, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const barlow = Barlow_Condensed({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["500", "600", "700"],
+  variable: "--font-barlow",
+  display: "swap",
 });
 
-const interTight = Inter_Tight({
+const plex = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-inter-tight",
+  weight: ["400", "500", "600"],
+  variable: "--font-plex",
+  display: "swap",
 });
 
+/* Transitoria: solo la usan las clases .kicker y .step-num de la paleta
+   anterior, que se van cuando /equipos quede repintada. */
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -19,21 +25,21 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  // [POR VALIDAR] dominio definitivo
-  metadataBase: new URL("https://logicav.cl"),
+  metadataBase: new URL("https://www.logicav.cl"),
   title: {
-    default:
-      "LOGICAV — Mantención y climatización para empresas | Santiago, RM",
+    default: "LOGICAV | Climatización e ingeniería",
     template: "%s | LOGICAV",
   },
   description:
-    "Mantención preventiva y correctiva, instalación y proyectos de climatización para empresas, edificios e instituciones en la Región Metropolitana. Informe técnico y trazabilidad por equipo.",
+    "Instalación, mantención y proyectos de climatización para hogar, empresas y faena. Equipos inverter Anwo, Midea y Clark con instalación certificada.",
   keywords: [
-    "mantención aire acondicionado empresas",
-    "climatización Santiago",
-    "mantención preventiva HVAC",
-    "instalación aire acondicionado comercial",
-    "contrato de mantención climatización",
+    "climatización",
+    "aire acondicionado",
+    "HVAC",
+    "instalación aire acondicionado",
+    "mantención climatización",
+    "minería",
+    "Chile",
   ],
   alternates: {
     canonical: "/",
@@ -41,10 +47,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_CL",
+    url: "https://www.logicav.cl",
     siteName: "LOGICAV",
-    title: "LOGICAV — Mantención y climatización para empresas",
+    title: "LOGICAV | Climatización e ingeniería",
     description:
-      "Instalación, mantención preventiva y correctiva de climatización para empresas, edificios e instituciones. Región Metropolitana.",
+      "Instalación, mantención y proyectos de climatización para hogar, empresas y faena.",
   },
   robots: {
     index: true,
@@ -59,8 +66,8 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="es"
-      className={`${inter.variable} ${interTight.variable} ${plexMono.variable}`}
+      lang="es-CL"
+      className={`${barlow.variable} ${plex.variable} ${plexMono.variable}`}
     >
       <body>{children}</body>
     </html>
