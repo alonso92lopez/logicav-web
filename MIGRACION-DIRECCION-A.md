@@ -14,12 +14,17 @@ La regla que ordena todo el trabajo:
 El código fuente del diseño está en:
 
 ```
-C:/Users/alons/OneDrive/Escritorio/logicav_ventas/apps/web/
+C:/Users/alons/OneDrive/Escritorio/logicav_ventas (old)/apps/web/
   app/globals.css      ← tokens de la Dirección A
   app/layout.tsx       ← fuentes (Barlow Condensed + IBM Plex Sans)
   app/page.tsx         ← orden de secciones
   components/*.tsx     ← 15 componentes
 ```
+
+**La ruta lleva un espacio y paréntesis: hay que citarla siempre.** La carpeta
+se renombró a `logicav_ventas (old)` justamente para recordar que está
+deprecada y que no se trabaja ahí. Es solo lectura: se saca el diseño y nada
+más.
 
 Se lee con ruta absoluta desde acá. **No se copia el repo ni su estructura de
 monorepo** — solo el lenguaje visual y los componentes.
@@ -123,14 +128,20 @@ propia. **La fotografía es el mayor limitante del rediseño**, no el código.
 
 ## Cómo ejecutarlo
 
+> **Corregido el 2026-09-02, durante la migración.** Los pasos 3 y 5 estaban
+> mal: este proyecto **no tiene la integración de GitHub conectada**. Ni el
+> push genera preview, ni el merge publica. Todo sale del CLI.
+
 1. Rama nueva desde `main`. **No trabajar directo en `main`.**
 2. Migrar, verificar `npm run build` y `npm run lint` en local.
-3. Push de la rama: Vercel genera una URL de preview automática.
-4. Revisar el preview en vivo.
-5. Recién con el visto bueno, merge a `main` → eso publica en logicav.cl.
+3. `npx vercel deploy` → devuelve una URL de preview.
+4. Revisar el preview en vivo (tiene Deployment Protection: se abre con la
+   sesión de Vercel de `alonsolopezlogicav-2666`).
+5. Con el visto bueno, merge a `main` y push.
+6. `npx vercel deploy --prod` → **este es el paso que publica en logicav.cl.**
 
-Rollback: si algo sale mal después del merge, se promueve el deployment
-anterior desde Vercel. `main` no se toca hasta el paso 5.
+Rollback: `npx vercel rollback`, o promover el deployment anterior desde el
+panel. `main` no se toca hasta el paso 5.
 
 ## Cuentas — es fácil equivocarse, hay varias
 
@@ -139,5 +150,21 @@ anterior desde Vercel. `main` no se toca hasta el paso 5.
   `alonsolopezlogicav-maker`, que es la del *otro* repo. Hay que cambiarla de
   vuelta con `gh auth switch`.
 - **Vercel:** `alonsolopezlogicav-2666`. Proyecto
-  `prj_2b0FrcDClaaRq7zjHDheGv6buaGb`. El CLI puede quedar logueado en
-  `contactoaldato-5508`, que no tiene acceso a nada de esto.
+  `prj_2b0FrcDClaaRq7zjHDheGv6buaGb`. El CLI quedó bien logueado ahí, pero el
+  **MCP de Vercel está en `contactoaldato-5508`** y devuelve 403 contra este
+  proyecto: para consultar deployments hay que usar el CLI.
+- **`gh`:** el push usa la cuenta *activa* de `gh`, porque `~/.gitconfig`
+  enruta github.com por `gh auth git-credential`. Hay tres cuentas cargadas;
+  verificar con `gh auth status` que la activa sea `alonso92lopez`.
+
+
+---
+
+## Estado final
+
+La migración se completó y está publicada. Después se sumaron, en este orden:
+ajustes de móvil y logo con fondo transparente; la franja de marcas monocroma
+con 20 logos; precios tachados en `/equipos`; y `/calculadora` con agendamiento
+de visita.
+
+Lo que quedó abierto no es de código y está en `DATOS-POR-VALIDAR.md`.
