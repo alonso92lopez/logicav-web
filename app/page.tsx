@@ -1,30 +1,29 @@
-import Image from "next/image";
-import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { StatsBar } from "@/components/StatsBar";
+import { SegmentsSection } from "@/components/SegmentsSection";
+import { TrustSection } from "@/components/TrustSection";
+import { BrandsSection } from "@/components/BrandsSection";
+import { ServicesGrid } from "@/components/ServicesGrid";
+import { ProductsCarousel } from "@/components/ProductsCarousel";
+import { FeaturedServices } from "@/components/FeaturedServices";
+import { Projects } from "@/components/Projects";
+import { About } from "@/components/About";
+import { Contact } from "@/components/Contact";
+import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
-import { QuoteForm } from "@/components/QuoteForm";
-import {
-  backing,
-  brands,
-  contact,
-  methodology,
-  plans,
-  projects,
-  sectors,
-  services,
-  stats,
-} from "@/lib/content";
+import { contact } from "@/lib/content";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HVACBusiness",
   name: "LOGICAV",
   description:
-    "Mantención preventiva y correctiva, instalación y proyectos de climatización para empresas, edificios e instituciones.",
-  url: "https://logicav.cl",
+    "Instalación, mantención y proyectos de climatización para hogar, empresas y faena.",
+  url: "https://www.logicav.cl",
   email: contact.email,
   telephone: contact.phoneE164,
-  areaServed: { "@type": "AdministrativeArea", name: "Región Metropolitana, Chile" },
+  areaServed: { "@type": "Country", name: "Chile" },
   address: { "@type": "PostalAddress", addressRegion: "Región Metropolitana", addressCountry: "CL" },
   openingHours: "Mo-Fr 08:30-18:00",
   priceRange: "$$",
@@ -41,427 +40,33 @@ export default function Home() {
         }}
       />
 
-      <main>
-        {/* ——— Hero + Servicios ——— */}
-        <div className="relative mx-auto max-w-6xl px-5 md:px-8">
-          <div>
-            <div>
-              <section className="flex min-h-[calc(100vh-5rem)] flex-col justify-center py-14">
-                <p className="kicker">
-                  Climatización · Mantención · Proyectos — {contact.coverage}
-                </p>
-                <h1
-                  className="mt-5 font-display text-4xl font-bold leading-[1.08] tracking-tight md:text-[3.4rem]"
-                >
-                  Mantención y climatización para instalaciones que no pueden
-                  detenerse.
-                </h1>
-                <p className="mt-6 max-w-xl text-lg leading-8 text-ink-soft">
-                  Instalación, mantención preventiva y correctiva de aire
-                  acondicionado para empresas, edificios e instituciones.
-                  Ejecución ordenada, informe técnico y trazabilidad por equipo.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link
-                    href="#cotizar"
-                    className="rounded-md bg-accent px-6 py-3.5 font-semibold text-white transition-colors hover:bg-accent-dark"
-                  >
-                    Solicitar cotización
-                  </Link>
-                  <Link
-                    href="#cotizar"
-                    className="rounded-md border border-line px-6 py-3.5 font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
-                  >
-                    Agendar visita técnica
-                  </Link>
-                </div>
+      <main className="min-h-screen bg-shell text-navy-800">
+        {/* Canal directo, aparte del formulario: el formulario va a Resend. */}
+        <a
+          href={contact.whatsapp}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Escribir por WhatsApp"
+          className="fixed bottom-6 right-6 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-navy-900/25 transition hover:bg-[#1FB855]"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7" aria-hidden>
+            <path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2zm0 18.02h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.22-8.24 8.22z" />
+          </svg>
+        </a>
 
-                <ul className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-6">
-                  {stats.map((s) => (
-                    <li key={s.label}>
-                      <p className="font-mono text-2xl font-medium text-ink">
-                        {s.prefix}
-                        <span>{s.value}</span>
-                        {s.suffix ?? ""}
-                      </p>
-                      <p className="mt-1 text-xs leading-5 text-ink-faint">{s.label}</p>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-
-              {/* Servicios */}
-              <section id="servicios" className="pb-10">
-                <p className="kicker">
-                  Servicios
-                </p>
-                <h2
-                  className="mt-3 max-w-lg font-display text-3xl font-bold tracking-tight md:text-4xl"
-                >
-                  Un solo proveedor para operar, mantener y proyectar.
-                </h2>
-
-                <div className="mt-4">
-                  {services.map((s) => (
-                    <article
-                      key={s.id}
-                      data-svc={s.id}
-                      className="flex min-h-[44vh] flex-col justify-center border-b border-line py-12 last:border-b-0"
-                    >
-                      <p className="font-mono text-sm text-accent">{s.kicker}</p>
-                      <h3 className="mt-2 font-display text-2xl font-bold tracking-tight">
-                        {s.title}
-                      </h3>
-                      <p className="mt-4 max-w-xl leading-7 text-ink-soft">{s.text}</p>
-                      <ul className="mt-5 space-y-2">
-                        {s.includes.map((item) => (
-                          <li key={item} className="flex items-start gap-2.5 text-sm text-ink-soft">
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="mt-5 text-sm text-ink-faint">
-                        <span className="font-medium text-ink">Aplica a:</span> {s.appliesTo}
-                      </p>
-                      <Link
-                        href={s.cta.href}
-                        className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-accent hover:text-accent-dark"
-                      >
-                        {s.cta.label}
-                        <span aria-hidden="true">→</span>
-                      </Link>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-
-        {/* ——— Marcas ——— */}
-        <section className="border-y border-line bg-mist">
-          <div className="mx-auto max-w-6xl px-5 py-12 md:px-8">
-            <p className="text-center font-mono text-xs uppercase tracking-[0.22em] text-ink-faint">
-              Instalamos y mantenemos equipos de estas marcas
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
-              {brands.map((b) => (
-                <div key={b.alt}>
-                  <Image
-                    src={b.src}
-                    alt={b.alt}
-                    width={140}
-                    height={56}
-                    className="h-10 w-auto object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 md:h-12"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ——— Planes ——— */}
-        <section id="planes" className="mx-auto max-w-6xl px-5 py-24 md:px-8">
-          <div className="max-w-2xl">
-            <p className="kicker">
-              Planes de mantención
-            </p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-              Un contrato claro, sin letra chica técnica.
-            </h2>
-            <p className="mt-4 leading-7 text-ink-soft">
-              {plans.note}
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            {plans.items.map((p) => (
-              <div
-                key={p.id}
-                className={`flex flex-col rounded-lg border p-7 ${
-                  p.featured ? "border-accent shadow-[0_8px_40px_-12px_rgba(10,102,232,0.25)]" : "border-line"
-                }`}
-              >
-                {p.featured && (
-                  <p className="mb-4 w-fit rounded-full bg-accent-soft px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
-                    Más contratado
-                  </p>
-                )}
-                <h3 className="font-display text-2xl font-bold">{p.name}</h3>
-                <p className="mt-2 text-sm leading-6 text-ink-soft">{p.tagline}</p>
-                <p className="mt-6 font-mono text-2xl font-medium text-ink">{p.price}</p>
-                <p className="text-xs text-ink-faint">{p.priceUnit}</p>
-                <ul className="mt-6 flex-1 space-y-3 border-t border-line pt-6">
-                  {p.features.map((f) => (
-                    <li key={f.label} className="flex items-baseline justify-between gap-4 text-sm">
-                      <span className="text-ink-soft">{f.label}</span>
-                      <span className="text-right font-medium text-ink">{f.value}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/?plan=${p.id}#cotizar`}
-                  className={`mt-8 rounded-md px-5 py-3 text-center text-sm font-semibold transition-colors ${
-                    p.featured
-                      ? "bg-accent text-white hover:bg-accent-dark"
-                      : "border border-line text-ink hover:border-accent hover:text-accent"
-                  }`}
-                >
-                  Cotizar este plan
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ——— Metodología ——— */}
-        <section id="metodologia" className="border-y border-line bg-mist">
-          <div className="mx-auto max-w-6xl px-5 py-24 md:px-8">
-            <div className="max-w-2xl">
-              <p className="kicker">
-                Metodología
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-                Cada mantención deja evidencia.
-              </h2>
-              <p className="mt-4 leading-7 text-ink-soft">
-                No trabajamos “a ojo”. Cada equipo tiene su pauta, cada visita su
-                checklist, y cada cierre su informe. Esa trazabilidad es la
-                diferencia entre un contrato de mantención y una promesa.
-              </p>
-            </div>
-
-            <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_360px]">
-              <ol className="space-y-0">
-                {methodology.map((m, i) => (
-                  <li
-                    key={m.num}
-                    className={`grid grid-cols-[64px_1fr] gap-5 py-7 ${
-                      i < methodology.length - 1 ? "border-b border-line" : ""
-                    }`}
-                  >
-                    <span className="step-num text-3xl font-medium text-accent md:text-4xl">
-                      {m.num}
-                    </span>
-                    <div>
-                      <h3 className="font-display text-xl font-bold">{m.title}</h3>
-                      <p className="mt-2 max-w-xl leading-7 text-ink-soft">{m.text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-
-              {/* Mock del informe técnico */}
-              <aside className="lg:pt-2">
-                <div className="sticky top-28 rounded-lg border border-line bg-paper p-6 shadow-[0_10px_40px_-16px_rgba(29,43,56,0.18)]">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                    Informe técnico · Ejemplo
-                  </p>
-                  <p className="mt-3 font-display text-lg font-bold">
-                    Mantención preventiva — Visita 2/4
-                  </p>
-                  <dl className="mt-5 space-y-3 border-t border-line pt-5 font-mono text-[13px]">
-                    <div className="flex justify-between">
-                      <dt className="text-ink-faint">Equipo</dt>
-                      <dd>Split muro 18.000 BTU</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-ink-faint">Presión succión</dt>
-                      <dd>68 psi ✓</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-ink-faint">Consumo compresor</dt>
-                      <dd>4,1 A ✓</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-ink-faint">Filtros</dt>
-                      <dd>Lavados ✓</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-ink-faint">Drenaje</dt>
-                      <dd>Despejado ✓</dd>
-                    </div>
-                    <div className="flex justify-between">
-                      <dt className="text-ink-faint">Registro fotográfico</dt>
-                      <dd>6 fotos</dd>
-                    </div>
-                  </dl>
-                  <p className="mt-5 border-t border-line pt-4 text-xs leading-5 text-ink-soft">
-                    Observación: se recomienda recambio de aislación en línea de
-                    succión en la próxima visita.
-                  </p>
-                </div>
-              </aside>
-            </div>
-          </div>
-        </section>
-
-        {/* ——— Sectores y proyectos ——— */}
-        <section id="proyectos" className="mx-auto max-w-6xl px-5 py-24 md:px-8">
-          <div className="max-w-2xl">
-            <p className="kicker">
-              Sectores y trabajos
-            </p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-              Donde una falla de clima es un problema operativo.
-            </h2>
-          </div>
-
-          <ul className="mt-8 flex flex-wrap gap-2.5">
-            {sectors.map((s) => (
-              <li
-                key={s}
-                className="rounded-full border border-line px-4 py-2 text-sm text-ink-soft"
-              >
-                {s}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {projects.map((p) => (
-              <article
-                key={p.title}
-                className="overflow-hidden rounded-lg border border-line"
-              >
-                <div className="relative h-52 w-full">
-                  <Image
-                    src={p.image}
-                    alt={p.title}
-                    fill
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
-                    {p.category}
-                  </p>
-                  <h3 className="mt-2 font-display text-lg font-bold leading-snug">
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-ink-soft">{p.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* ——— Respaldo ——— */}
-        <section id="respaldo" className="border-y border-line bg-mist">
-          <div className="mx-auto max-w-6xl px-5 py-24 md:px-8">
-            <div className="grid gap-12 lg:grid-cols-[1fr_1fr]">
-              <div>
-                <p className="kicker">
-                  Respaldo técnico
-                </p>
-                <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-                  Quiénes ejecutan el trabajo.
-                </h2>
-                <p className="mt-5 max-w-xl leading-8 text-ink-soft">
-                  {backing.intro}
-                </p>
-                <p className="mt-6 font-mono text-sm text-ink-faint">
-                  Operando desde {backing.since} · {contact.coverage}
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                {backing.items.map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-lg border border-line bg-paper p-6"
-                  >
-                    <h3 className="font-display text-base font-bold">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-ink-soft">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ——— Cotización ——— */}
-        <section id="cotizar" className="mx-auto max-w-6xl px-5 py-24 md:px-8">
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <p className="kicker">
-                Cotización
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-                Cuéntanos qué necesita tu instalación.
-              </h2>
-              <p className="mt-5 max-w-md leading-7 text-ink-soft">
-                Con estos datos preparamos una cotización o coordinamos una
-                visita técnica para hacer el catastro de tus equipos.
-              </p>
-
-              <dl className="mt-10 space-y-5 text-sm">
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                    WhatsApp
-                  </dt>
-                  <dd className="mt-1">
-                    <a
-                      href={contact.whatsapp}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-semibold text-ink hover:text-accent"
-                    >
-                      {contact.phoneDisplay}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                    Correo
-                  </dt>
-                  <dd className="mt-1">
-                    <a
-                      href={`mailto:${contact.email}`}
-                      className="font-semibold text-ink hover:text-accent"
-                    >
-                      {contact.email}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                    Horario
-                  </dt>
-                  <dd className="mt-1 text-ink-soft">
-                    {contact.hours}. {contact.hoursNote}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
-                    Cobertura
-                  </dt>
-                  <dd className="mt-1 text-ink-soft">{contact.coverageDetail}</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div className="rounded-lg border border-line p-6 md:p-8">
-              <QuoteForm />
-            </div>
-          </div>
-        </section>
+        <Hero />
+        <StatsBar />
+        <SegmentsSection />
+        <TrustSection />
+        <BrandsSection />
+        <ServicesGrid />
+        <ProductsCarousel />
+        <FeaturedServices />
+        <Projects />
+        <About />
+        <Contact />
+        <CtaBanner />
       </main>
-
-      {/* WhatsApp flotante, discreto */}
-      <a
-        href={contact.whatsapp}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Escribir por WhatsApp"
-        className="fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-line bg-paper shadow-lg transition-colors hover:border-accent"
-      >
-        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-ink" aria-hidden="true">
-          <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-3c-.3-.4 0-.5.1-.7l.4-.5c.1-.2.1-.3.2-.5v-.5c-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.2z" />
-        </svg>
-      </a>
 
       <Footer />
     </>

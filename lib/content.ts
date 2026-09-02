@@ -10,197 +10,169 @@ export const contact = {
   whatsapp: "https://wa.me/56987066666",
   email: "contacto@logicav.cl",
   coverage: "Santiago y regiones", // [POR VALIDAR]
-  coverageDetail: "Base en la Región Metropolitana. Proyectos en regiones y faena se coordinan caso a caso.", // [POR VALIDAR]
+  coverageDetail:
+    "Base en la Región Metropolitana. Proyectos en regiones y faena se coordinan caso a caso.", // [POR VALIDAR]
   hours: "Lunes a viernes, 8:30 a 18:00 h", // [POR VALIDAR]
   hoursNote: "Atención de emergencias para clientes con contrato vigente.", // [POR VALIDAR]
 };
 
+/*
+  Franja técnica bajo el hero. Las cuatro cifras salen del catálogo real y
+  de la cobertura declarada: ninguna afirma volumen de operación, así que
+  no hay nada que validar acá.
+
+  TODO — cuando existan credenciales duras (años operando, proyectos
+  ejecutados, tiempo de respuesta comprometido) reemplazan a estas, que
+  pesan bastante menos.
+*/
 export const stats = [
-  // [POR VALIDAR] las tres cifras
-  { value: 300, prefix: "+", label: "mantenciones ejecutadas" },
-  { value: 120, prefix: "+", label: "equipos bajo contrato" },
-  { value: 48, prefix: "", suffix: " h", label: "respuesta estándar a requerimientos" },
+  { value: "9.000–24.000", label: "BTU en catálogo" },
+  { value: "3", label: "Marcas que trabajamos" },
+  { value: "Inverter", label: "Tecnología de los equipos" },
+  { value: contact.coverage, label: "Cobertura de proyectos" },
+];
+
+/* Las tres líneas de negocio. Ordenan el sitio entero. */
+export const segments = [
+  {
+    label: "Hogar",
+    title: "Equipos e instalación",
+    text: "Split muro inverter de Anwo, Midea y Clark con instalación incluida y precio cerrado. Te asesoramos en la capacidad según los m² y la orientación del recinto.",
+    cta: "Ver equipos y precios",
+    href: "/equipos",
+  },
+  {
+    label: "Empresas",
+    title: "Proyectos HVAC",
+    text: "Oficinas, bodegas, locales comerciales y edificios. Cálculo de carga térmica, selección de equipos y mantención programada para que la operación no se detenga.",
+    cta: "Solicitar cotización",
+    href: "/#contacto",
+  },
+  {
+    label: "Minería e industrial",
+    title: "Entornos exigentes",
+    text: "Faenas, zonas remotas y plantas en operación continua. Adaptamos la solución a la altura, el polvo en suspensión y los ciclos de trabajo sin interrupción.",
+    cta: "Hablar con el área técnica",
+    href: "/#contacto",
+  },
+];
+
+export const trustItems = [
+  {
+    title: "Cálculo antes de cotizar",
+    text: "Dimensionamos la capacidad según superficie, orientación, aislación y carga interna. No vendemos un equipo que va a quedar corto ni sobredimensionado.",
+  },
+  {
+    title: "Instalación limpia",
+    text: "Perforación, canalización, vacío de líneas y puesta en marcha con protocolo. Dejamos el recinto operativo y sin obra pendiente.",
+  },
+  {
+    title: "Mantención programada",
+    text: "Planes por contrato con visitas calendarizadas: lavado de filtros y serpentines, control de presiones y registro por equipo.",
+  },
+  {
+    title: "Respuesta en terreno",
+    text: "Coordinación directa con el área técnica para diagnóstico y reparación, incluida faena y zonas alejadas de la Región Metropolitana.",
+  },
 ];
 
 export const services = [
   {
-    id: "preventiva",
-    kicker: "01",
+    title: "Instalación",
+    text: "Equipos split muro, cassette, ducto y piso-techo en hogares, oficinas, comercios y recintos técnicos. Incluye vacío de líneas, prueba de estanqueidad y puesta en marcha.",
+  },
+  {
     title: "Mantención preventiva",
-    text: "Programas de mantención con pauta por equipo: limpieza de unidades y filtros, revisión de presiones, consumos eléctricos y drenajes, y ajustes según fabricante.",
-    includes: ["Pauta de mantención por equipo", "Informe técnico con registro fotográfico", "Calendario anual de visitas"],
-    appliesTo: "Oficinas, comercio, edificios e instituciones con equipos en operación continua.",
-    cta: { label: "Ver planes de mantención", href: "#planes" },
+    text: "Programas por contrato: lavado de filtros y serpentines, control de presiones y consumo, revisión de drenajes y registro por equipo.",
   },
   {
-    id: "correctiva",
-    kicker: "02",
     title: "Diagnóstico y reparación",
-    text: "Inspección técnica, detección de fallas y ejecución de reparaciones para recuperar la operación en el menor tiempo posible.",
-    includes: ["Diagnóstico documentado", "Reparación con repuestos cotizados", "Pruebas de funcionamiento"],
-    appliesTo: "Equipos detenidos, con bajo rendimiento o consumo anormal.",
-    cta: { label: "Solicitar visita técnica", href: "#cotizar" },
+    text: "Detección de fugas, falla de compresor, problemas de control y recarga de refrigerante. Informe técnico y presupuesto antes de intervenir.",
   },
   {
-    id: "instalacion",
-    kicker: "03",
-    title: "Instalación de equipos",
-    text: "Montaje de equipos split muro y cassette: fijaciones, vacío del circuito, carga de refrigerante, pruebas y puesta en marcha.",
-    includes: ["Evaluación del recinto", "Instalación certificada de circuito y drenaje", "Puesta en marcha documentada"],
-    appliesTo: "Oficinas, locales comerciales, salas técnicas y espacios de atención.",
-    cta: { label: "Cotizar instalación", href: "#cotizar" },
+    title: "Proyectos HVAC",
+    text: "Cálculo de carga térmica, selección de equipos, canalización y coordinación con las demás especialidades de la obra.",
   },
   {
-    id: "proyectos",
-    kicker: "04",
-    title: "Proyectos e ingeniería HVAC",
-    text: "Levantamiento, dimensionamiento térmico y ejecución de proyectos de climatización para recintos nuevos, ampliaciones o renovación de equipos.",
-    includes: ["Levantamiento y cálculo de cargas", "Especificación de equipos", "Ejecución y entrega documentada"],
-    appliesTo: "Empresas e instituciones que licitan o planifican obras.",
-    cta: { label: "Conversar un proyecto", href: "#cotizar" },
+    title: "Contratos de servicio",
+    text: "Para empresas que necesitan continuidad: visitas calendarizadas, prioridad de atención y trazabilidad de cada intervención.",
   },
   {
-    id: "suministro",
-    kicker: "05",
-    title: "Suministro de equipos",
-    text: "Provisión de equipos split inverter de 9.000 a 24.000 BTU de las marcas Anwo, Midea y Clark, con instalación y mantención en un solo contrato.",
-    includes: ["Equipos inverter 9.000–24.000 BTU", "Marcas Anwo, Midea y Clark", "Instalación y garantía de servicio"],
-    appliesTo: "Recambio o ampliación de parque de equipos.",
-    cta: { label: "Ver equipos", href: "/equipos" },
+    title: "Minería e industrial",
+    text: "Climatización en faena y zonas remotas: altura, polvo en suspensión, temperatura extrema y operación continua sin ventanas de detención.",
   },
 ];
 
-export const plans = {
-  note: "Valores referenciales netos (+ IVA) por equipo. El contrato se cotiza según catastro de equipos, criticidad y frecuencia de uso.",
-  items: [
-    {
-      id: "preventivo",
-      name: "Preventivo",
-      tagline: "Para instalaciones estables que necesitan orden y respaldo.",
-      price: "Desde $35.000", // dato real del catálogo actual
-      priceUnit: "por equipo / visita, + IVA",
-      features: [
-        { label: "Visitas programadas", value: "2 al año" }, // [POR VALIDAR]
-        { label: "Pauta e informe técnico por visita", value: "Incluido" },
-        { label: "Registro fotográfico", value: "Incluido" },
-        { label: "Atención de fallas", value: "Se cotiza por evento" },
-        { label: "Respuesta a requerimientos", value: "72 h hábiles" }, // [POR VALIDAR]
-      ],
-      featured: false,
-    },
-    {
-      id: "preventivo-correctivo",
-      name: "Preventivo + Correctivo",
-      tagline: "Para operaciones que no pueden esperar una cotización por cada falla.",
-      price: "Desde $55.000", // [POR VALIDAR]
-      priceUnit: "por equipo / visita, + IVA",
-      features: [
-        { label: "Visitas programadas", value: "4 al año" }, // [POR VALIDAR]
-        { label: "Pauta e informe técnico por visita", value: "Incluido" },
-        { label: "Mano de obra correctiva", value: "Incluida" }, // [POR VALIDAR]
-        { label: "Repuestos", value: "Cotizados aparte" },
-        { label: "Respuesta a fallas", value: "48 h hábiles" }, // [POR VALIDAR]
-      ],
-      featured: true,
-    },
-    {
-      id: "integral",
-      name: "Integral",
-      tagline: "Para instalaciones críticas: cobertura completa y respuesta prioritaria.",
-      price: "A convenir",
-      priceUnit: "según catastro",
-      features: [
-        { label: "Visitas programadas", value: "Mensuales o según criticidad" }, // [POR VALIDAR]
-        { label: "Pauta e informe técnico por visita", value: "Incluido" },
-        { label: "Mano de obra correctiva", value: "Incluida" },
-        { label: "Repuestos menores", value: "Incluidos" }, // [POR VALIDAR]
-        { label: "Respuesta a fallas", value: "24 h" }, // [POR VALIDAR]
-      ],
-      featured: false,
-    },
-  ],
-};
-
-export const methodology = [
+/*
+  Servicios con precio publicado. Los valores vienen del catálogo del sitio
+  anterior (precios "oferta" de abril 2026), igual que los de /equipos.
+  [POR VALIDAR] vigencia de los cuatro montos.
+*/
+export const featuredServices = [
   {
-    num: "01",
-    title: "Levantamiento y catastro",
-    text: "Inventario de todos los equipos de la instalación: marca, modelo, capacidad, ubicación, estado y criticidad para la operación.",
+    slug: "instalacion-aire",
+    nombre: "Instalación aire acondicionado",
+    descripcion:
+      "Instalación profesional de equipos de aire acondicionado en hogares y empresas",
+    precio: 150000,
+    precioOferta: 120000,
+    imageUrl: "/images/products/instalacion-aire.png",
   },
   {
-    num: "02",
-    title: "Pauta por equipo",
-    text: "Cada equipo recibe un plan de mantención según su tipo, uso y recomendaciones del fabricante. Nada queda a criterio del momento.",
-  },
-  {
-    num: "03",
-    title: "Ejecución con checklist",
-    text: "Cada visita sigue la pauta punto por punto: limpieza, mediciones eléctricas, presiones de refrigerante, drenajes y ajustes.",
-  },
-  {
-    num: "04",
-    title: "Informe técnico",
-    text: "Al cierre de cada visita se entrega un informe con registro fotográfico, mediciones y observaciones. Sirve de respaldo ante auditorías y licitaciones.",
-  },
-  {
-    num: "05",
-    title: "Historial y trazabilidad",
-    text: "Cada equipo acumula su hoja de vida: mantenciones, fallas, repuestos. La información queda disponible para el administrador del contrato.",
+    slug: "mantencion-aire",
+    nombre: "Mantención aire acondicionado",
+    descripcion: "Limpieza, revisión y optimización del equipo",
+    precio: 50000,
+    precioOferta: 35000,
+    imageUrl: "/images/products/mantencion-aire.jpg",
   },
 ];
 
-export const sectors = [
-  "Oficinas corporativas",
-  "Comercio y retail",
-  "Edificios en administración",
-  "Instituciones públicas",
-  "Salud y educación",
-  "Salas técnicas y de equipos",
-];
-
+/*
+  [POR VALIDAR] Las tres son fotos de stock y describen tipos de trabajo,
+  no obras ejecutadas. Reemplazar por 2–3 proyectos reales con foto propia,
+  comuna y alcance. Es el mayor limitante del rediseño.
+*/
 export const projects = [
   {
-    title: "Instalación de equipos split muro",
-    category: "Instalación",
-    text: "Montaje, vacío, carga, pruebas y puesta en marcha de equipos de climatización para espacios de trabajo y atención.",
+    title: "Instalación residencial split muro",
+    category: "Hogar",
+    text: "Equipos inverter para casas y departamentos. Asesoría de capacidad, canalización a la vista o embutida, y puesta en marcha el mismo día.",
     image: "/images/projects/proyecto-1.jpg",
   },
   {
-    title: "Mantención preventiva programada",
-    category: "Mantención",
-    text: "Limpieza, revisión y ajustes según pauta, con informe técnico al cierre de cada visita.",
+    title: "Climatización de oficinas y locales",
+    category: "Empresas",
+    text: "Cálculo de carga térmica, selección de equipos y distribución por zona. Mantención programada para operar sin cortes en horario comercial.",
     image: "/images/projects/proyecto-2.jpg",
   },
   {
-    title: "Diagnóstico y reparación técnica",
-    category: "Correctiva",
-    text: "Levantamiento de fallas, corrección y recuperación de la operación en el menor tiempo posible.",
+    title: "Sistema de climatización en faena",
+    category: "Minería e industrial",
+    text: "Instalación y mantención con polvo en suspensión, temperatura extrema y operación continua. Coordinación con los protocolos de acceso del mandante.",
     image: "/images/projects/proyecto-3.jpg",
   },
 ];
 
-export const backing = {
+export const about = {
   intro:
-    "LOGICAV es una empresa chilena de ingeniería técnica en climatización. Trabajamos con un equipo propio de técnicos y un método claro: pauta, informe y trazabilidad en cada visita.",
-  items: [
-    {
-      title: "Equipo técnico propio",
-      text: "Técnicos en climatización con experiencia en instalación, mantención y diagnóstico de equipos split, cassette y multi-split.", // [POR VALIDAR]
-    },
-    {
-      // [POR VALIDAR] versión con certificación SEC en DATOS-POR-VALIDAR.md:
-      // no publicar esa afirmación hasta confirmarla.
-      title: "Trabajo documentado",
-      text: "Cada instalación y mantención se entrega con informe técnico y registro fotográfico del trabajo realizado.",
-    },
-    {
-      title: "Marcas que trabajamos",
-      text: "Instalamos y mantenemos equipos Anwo, Midea y Clark, entre otras marcas presentes en el mercado chileno.",
-    },
-    {
-      title: "Cobertura",
-      text: `${contact.coverage}. ${contact.coverageDetail}`,
-    },
+    "LOGICAV instala, mantiene y proyecta sistemas de climatización. Vendemos equipos porque son parte del trabajo, pero lo que entregamos es el sistema funcionando: el cálculo previo, la instalación bien hecha y el plan que la sostiene.",
+  introSecond:
+    "Esa es también la razón por la que atendemos hogar, empresa y faena con el mismo equipo: cambian la escala y las condiciones, no el criterio.",
+  /*
+    Capacidades internas, no credenciales. La versión con "personal con
+    licencia SEC vigente" está en DATOS-POR-VALIDAR.md y no se publica
+    hasta confirmar quién la tiene y de qué clase.
+
+    TODO — acá van las credenciales reales cuando estén: años de
+    operación, inicio de actividades, certificaciones de los técnicos y
+    mandantes para los que se ha trabajado.
+  */
+  capacidades: [
+    { label: "Dimensionamiento", text: "Cálculo de carga térmica y selección de equipo" },
+    { label: "Ejecución", text: "Instalación, canalización y puesta en marcha" },
+    { label: "Continuidad", text: "Mantención programada y atención de fallas" },
+    { label: "Administración", text: "Cotización formal, orden de compra y factura" },
   ],
   since: "2019", // [POR VALIDAR]
 };
@@ -353,6 +325,7 @@ export const formOptions = {
     "Instalación de equipos",
     "Proyecto / obra nueva",
     "Compra de equipos",
+    "Minería / faena",
   ],
 };
 
