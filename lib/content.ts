@@ -16,21 +16,6 @@ export const contact = {
   hoursNote: "Atención de emergencias para clientes con contrato vigente.", // [POR VALIDAR]
 };
 
-/*
-  Franja técnica bajo el hero. Las cuatro cifras salen del catálogo real y
-  de la cobertura declarada: ninguna afirma volumen de operación, así que
-  no hay nada que validar acá.
-
-  TODO — cuando existan credenciales duras (años operando, proyectos
-  ejecutados, tiempo de respuesta comprometido) reemplazan a estas, que
-  pesan bastante menos.
-*/
-export const stats = [
-  { value: "9.000–24.000", label: "BTU en catálogo" },
-  { value: "3", label: "Marcas que trabajamos" },
-  { value: "Inverter", label: "Tecnología de los equipos" },
-  { value: contact.coverage, label: "Cobertura de proyectos" },
-];
 
 /* Las tres líneas de negocio. Ordenan el sitio entero. */
 export const segments = [
@@ -211,6 +196,26 @@ export const brands = [
   { src: "/images/brands/tcl.png", alt: "TCL", scale: 0.92 },
   { src: "/images/brands/trane.png", alt: "Trane", scale: 1.06 },
   { src: "/images/brands/york.png", alt: "York", scale: 0.77 },
+];
+
+/*
+  Franja técnica bajo el hero. Las cuatro cifras salen del catálogo real, de
+  la lista de marcas y de la cobertura declarada: ninguna afirma volumen de
+  operación, así que no hay nada que validar acá.
+
+  El conteo de marcas se deriva de `brands` a propósito. Estaba escrito a
+  mano y quedó en 3 cuando la franja pasó a 20, contradiciendo a la sección
+  que tiene justo debajo.
+
+  TODO — cuando existan credenciales duras (años operando, proyectos
+  ejecutados, tiempo de respuesta comprometido) reemplazan a estas, que
+  pesan bastante menos.
+*/
+export const stats = [
+  { value: "9.000–24.000", label: "BTU en catálogo" },
+  { value: String(brands.length), label: "Marcas que atendemos" },
+  { value: "Inverter", label: "Tecnología de los equipos" },
+  { value: contact.coverage, label: "Cobertura de proyectos" },
 ];
 
 export type Product = {
