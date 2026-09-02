@@ -191,9 +191,26 @@ export const about = {
   masa de tinta de cada archivo si hay que recalcularla.
 */
 export const brands = [
-  { src: "/images/brands/anwo.png", alt: "Anwo", scale: 1.15 },
-  { src: "/images/brands/midea.png", alt: "Midea", scale: 1.25 },
-  { src: "/images/brands/clark.png", alt: "Clark", scale: 0.76 },
+  { src: "/images/brands/airolite.png", alt: "Airolite", scale: 0.83 },
+  { src: "/images/brands/anwo.png", alt: "Anwo", scale: 1.36 },
+  { src: "/images/brands/carrier.png", alt: "Carrier", scale: 0.88 },
+  { src: "/images/brands/clark.png", alt: "Clark", scale: 0.9 },
+  { src: "/images/brands/daikin.png", alt: "Daikin", scale: 1.15 },
+  { src: "/images/brands/fujitsu.png", alt: "Fujitsu", scale: 1.45 },
+  { src: "/images/brands/gree.png", alt: "Gree", scale: 0.93 },
+  { src: "/images/brands/hisense.png", alt: "Hisense", scale: 0.73 },
+  { src: "/images/brands/johnson-controls.png", alt: "Johnson Controls", scale: 1.45 },
+  { src: "/images/brands/kendal.png", alt: "Kendal", scale: 0.94 },
+  { src: "/images/brands/lennox.png", alt: "Lennox", scale: 1.16 },
+  { src: "/images/brands/lg.png", alt: "LG", scale: 1.41 },
+  { src: "/images/brands/midea.png", alt: "Midea", scale: 1.45 },
+  { src: "/images/brands/mirage.png", alt: "Mirage", scale: 1.45 },
+  { src: "/images/brands/mitsubishi-electric.png", alt: "Mitsubishi Electric", scale: 1.45 },
+  { src: "/images/brands/panasonic.png", alt: "Panasonic", scale: 0.7 },
+  { src: "/images/brands/samsung.png", alt: "Samsung", scale: 0.77 },
+  { src: "/images/brands/tcl.png", alt: "TCL", scale: 0.92 },
+  { src: "/images/brands/trane.png", alt: "Trane", scale: 1.06 },
+  { src: "/images/brands/york.png", alt: "York", scale: 0.77 },
 ];
 
 export type Product = {

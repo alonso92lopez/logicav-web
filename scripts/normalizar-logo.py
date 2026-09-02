@@ -2,31 +2,43 @@
 """
 Normaliza un logo de marca para la franja "Marcas que atendemos".
 
-Los archivos de logo llegan en cualquier estado: unos con fondo blanco
-horneado, otros con alfa y mucho relleno vacío, cada uno con su color y su
-proporción. Puestos en celdas iguales se ven desalineados, que es
-exactamente lo que hace ver barata una tira de marcas.
+Los archivos de logo llegan en cualquier estado: PNG, JPG, WEBP, AVIF o SVG,
+unos con fondo blanco horneado, otros con alfa y mucho relleno vacío, cada uno
+con su color y su proporción. Puestos en celdas iguales se ven desalineados,
+que es justo lo que hace ver barata una tira de marcas.
 
-Este script deja todos en el mismo estado:
+Este script los deja a todos en el mismo estado:
 
-  1. Quita el fondo. Si el archivo es opaco, toma el color de la esquina
-     como fondo y calcula el alfa por distancia RGB, así conserva el
-     antialias del borde en vez de dejarlo dentado.
-  2. Recorta al contenido real, para que la proporción que declara el
-     archivo sea la del logo y no la del lienzo.
-  3. Aplana a un solo tono. Es lo que hace que la fila se vea deliberada:
-     con los colores originales, un logo azul intenso y otro celeste
-     pálido nunca van a pesar lo mismo.
+  1. Abre cualquiera de esos formatos. Los SVG se rasterizan a 1200 px de
+     ancho, que da margen de sobra para una celda de ~200 px.
 
-Limitación: asume marcas de un color sobre fondo plano. Un logo con texto
-blanco calado dentro de una forma sólida perdería el calado; ésos hay que
-revisarlos a mano.
+  2. Calcula el alfa por lejanía del blanco, multiplicado por el alfa que ya
+     traía. Tratar el blanco como hueco es lo que hace funcionar los logos
+     calados: en TCL o Carrier las letras son blancas dentro de una forma
+     sólida, y con este criterio quedan como agujeros en vez de desaparecer
+     cuando se aplana el color. Como es una transición continua y no un
+     umbral, el antialias del borde se conserva.
+
+  3. Recorta al contenido real, para que la proporción que declara el archivo
+     sea la del logo y no la del lienzo.
+
+  4. Aplana a un solo tono. Es lo que hace que la fila se vea deliberada: con
+     los colores originales, un logo rojo intenso y otro celeste pálido nunca
+     van a pesar lo mismo.
+
+No sirve para archivos con el damero de transparencia horneado en los píxeles
+(pasa al guardar como JPG algo que se veía transparente en el navegador). Ahí
+el damero es información real de la imagen y hay que conseguir otro archivo.
 
 Uso:
-    python scripts/normalizar-logo.py public/images/brands/trane.png
-    python scripts/normalizar-logo.py public/images/brands/*.png
+    python scripts/normalizar-logo.py ~/Downloads/logos/trane.png
+    python scripts/normalizar-logo.py ~/Downloads/logos/LG-Logo.webp lg
+
+El segundo argumento es el slug de salida; si se omite se usa el nombre del
+archivo. Siempre escribe en public/images/brands/<slug>.png.
 """
 
+import io
 import sys
 from pathlib import Path
 
@@ -37,53 +49,58 @@ from PIL import Image
 # contenido de la página.
 TONO = (91, 115, 133)  # #5b7385
 
-# Margen que se deja alrededor del contenido, como fracción del lado menor.
-MARGEN = 0.02
+DESTINO = Path("public/images/brands")
+MARGEN = 0.02          # margen alrededor del contenido, sobre el lado menor
+ANCHO_SVG = 1200
+PISO = 60.0            # evita amplificar ruido en logos muy claros
+
+# Distancia al blanco bajo la cual un píxel se considera fondo y no tinta.
+# Varios archivos vienen sobre un gris casi blanco en vez de blanco puro
+# (Samsung llega en #f7f7f7, a distancia 13.9): sin este corte quedan con un
+# recuadro gris visible. El ramo sigue siendo continuo por encima del umbral,
+# así que el antialias del borde se conserva igual.
+UMBRAL = 22.0
 
 
-def distancia(c, ref):
-    return sum((a - b) ** 2 for a, b in zip(c, ref)) ** 0.5
+def distancia_al_blanco(c) -> float:
+    return ((255 - c[0]) ** 2 + (255 - c[1]) ** 2 + (255 - c[2]) ** 2) ** 0.5
 
 
-def normalizar(ruta: Path) -> None:
-    im = Image.open(ruta).convert("RGBA")
+def abrir(ruta: Path) -> Image.Image:
+    if ruta.suffix.lower() == ".svg":
+        import cairosvg
+
+        png = cairosvg.svg2png(url=str(ruta), output_width=ANCHO_SVG)
+        return Image.open(io.BytesIO(png)).convert("RGBA")
+    return Image.open(ruta).convert("RGBA")
+
+
+def normalizar(ruta: Path, slug: str) -> None:
+    im = abrir(ruta)
     w, h = im.size
     px = im.load()
 
-    alfa_original = im.getchannel("A")
-    valores = (
-        list(alfa_original.get_flattened_data())
-        if hasattr(alfa_original, "get_flattened_data")
-        else list(alfa_original.getdata())
-    )
-    era_opaco = all(a == 255 for a in valores)
+    lejos = PISO
+    for y in range(0, h, 2):
+        for x in range(0, w, 2):
+            if px[x, y][3] > 8:
+                d = distancia_al_blanco(px[x, y][:3])
+                if d > lejos:
+                    lejos = d
 
-    if era_opaco:
-        fondo = px[0, 0][:3]
-        # Se normaliza por el píxel más lejano del fondo para que un logo
-        # de color suave no quede translúcido entero.
-        lejos = max(
-            distancia(px[x, y][:3], fondo)
-            for y in range(0, h, 2)
-            for x in range(0, w, 2)
-        ) or 1.0
-        salida = Image.new("RGBA", (w, h))
-        dst = salida.load()
-        for y in range(h):
-            for x in range(w):
-                a = distancia(px[x, y][:3], fondo) / lejos
-                dst[x, y] = (*TONO, round(min(1.0, a) * 255))
-    else:
-        # Ya tiene alfa: se respeta y solo se cambia el color.
-        salida = Image.new("RGBA", (w, h))
-        dst = salida.load()
-        for y in range(h):
-            for x in range(w):
-                dst[x, y] = (*TONO, px[x, y][3])
+    rango = max(1.0, lejos - UMBRAL)
+    salida = Image.new("RGBA", (w, h))
+    dst = salida.load()
+    for y in range(h):
+        for x in range(w):
+            r, g, b, a = px[x, y]
+            cobertura = (distancia_al_blanco((r, g, b)) - UMBRAL) / rango
+            cobertura = 0.0 if cobertura < 0 else min(1.0, cobertura)
+            dst[x, y] = (*TONO, round((a / 255) * cobertura * 255))
 
     caja = salida.getchannel("A").getbbox()
     if caja is None:
-        print(f"  {ruta.name}: quedó vacío, se deja como estaba")
+        print(f"  {ruta.name}: quedó vacío tras el recorte, se omite")
         return
 
     m = max(1, round(min(w, h) * MARGEN))
@@ -94,28 +111,29 @@ def normalizar(ruta: Path) -> None:
         min(h, caja[3] + m),
     )
     salida = salida.crop(caja)
-    salida.save(ruta, optimize=True)
+
+    DESTINO.mkdir(parents=True, exist_ok=True)
+    final = DESTINO / f"{slug}.png"
+    salida.save(final, optimize=True)
 
     nw, nh = salida.size
-    origen = "opaco" if era_opaco else "con alfa"
-    print(f"  {ruta.name:14} {w}x{h} ({origen}) -> {nw}x{nh}  aspecto {nw / nh:.2f}")
+    print(f"  {ruta.name[:44]:46} -> {slug}.png  {nw}x{nh}  aspecto {nw / nh:.2f}")
 
 
 def main() -> int:
-    rutas = [Path(a) for a in sys.argv[1:]]
-    if not rutas:
+    args = sys.argv[1:]
+    if not args:
         print(__doc__)
         return 1
 
-    faltan = [r for r in rutas if not r.exists()]
-    if faltan:
-        for r in faltan:
-            print(f"no existe: {r}", file=sys.stderr)
+    ruta = Path(args[0])
+    if not ruta.exists():
+        print(f"no existe: {ruta}", file=sys.stderr)
         return 1
 
+    slug = args[1] if len(args) > 1 else ruta.stem.lower()
     print(f"Aplanando a #{TONO[0]:02x}{TONO[1]:02x}{TONO[2]:02x}:")
-    for r in rutas:
-        normalizar(r)
+    normalizar(ruta, slug)
     return 0
 
 

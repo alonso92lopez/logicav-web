@@ -20,7 +20,7 @@ export function BrandsSection() {
 
         {/* Borde por celda con margen negativo en vez de gap-px sobre un fondo:
             así una última fila incompleta no deja un bloque gris colgando. */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {brands.map((brand) => (
             <div
               key={brand.alt}
