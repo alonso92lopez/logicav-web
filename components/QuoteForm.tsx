@@ -24,9 +24,31 @@ const labelClass =
   origen abría wa.me desde el cliente; eso se descartó para no tener dos
   canales de leads.
 */
-export function QuoteForm({ variant = "card" }: { variant?: "card" | "plain" }) {
+export function QuoteForm({
+  variant = "card",
+  superficieInicial,
+  servicioInicial,
+  ctaLabel = "Solicitar cotización",
+}: {
+  variant?: "card" | "plain";
+  /* La calculadora traspasa acá los m² que la persona ya escribió, para no
+     preguntárselos de nuevo. Se sincroniza si los sigue cambiando. */
+  superficieInicial?: string;
+  servicioInicial?: string;
+  /* El botón dice lo que va a pasar. En la calculadora no es "cotizar". */
+  ctaLabel?: string;
+}) {
   const [state, formAction, pending] = useActionState(submitQuote, initialState);
-  const [metros, setMetros] = useState("");
+  const [metros, setMetros] = useState(superficieInicial ?? "");
+
+  // Sigue a la calculadora cuando cambia los m², pero deja que la persona
+  // los edite acá si quiere. Ajuste durante el render en vez de un efecto:
+  // así no hay un segundo pintado con el valor viejo.
+  const [ultimoInicial, setUltimoInicial] = useState(superficieInicial);
+  if (superficieInicial !== ultimoInicial) {
+    setUltimoInicial(superficieInicial);
+    setMetros(superficieInicial ?? "");
+  }
 
   const capacidad = sugerirCapacidad(metros);
   const wide = variant === "plain";
@@ -115,7 +137,7 @@ export function QuoteForm({ variant = "card" }: { variant?: "card" | "plain" }) 
             <select
               id={`q-servicio-${variant}`}
               name="servicio"
-              defaultValue=""
+              defaultValue={servicioInicial ?? ""}
               className={inputClass}
             >
               <option value="">Selecciona el servicio</option>
@@ -181,7 +203,7 @@ export function QuoteForm({ variant = "card" }: { variant?: "card" | "plain" }) 
         disabled={pending}
         className="mt-4 w-full bg-flame-500 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-flame-600 disabled:opacity-60"
       >
-        {pending ? "Enviando…" : "Solicitar cotización"}
+        {pending ? "Enviando…" : ctaLabel}
       </button>
 
       <p className="mt-3 text-[11px] leading-relaxed text-steel-500">

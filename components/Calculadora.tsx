@@ -9,6 +9,7 @@ import {
   type Sol,
 } from "@/lib/capacidad";
 import { formatCLP, products } from "@/lib/content";
+import { QuoteForm } from "./QuoteForm";
 
 const labelClass =
   "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.12em] text-steel-500";
@@ -39,6 +40,7 @@ export function Calculadora() {
     : [];
 
   return (
+    <>
     <div className="grid gap-px bg-line lg:grid-cols-[1fr_1fr]">
       {/* ---------- Entradas ---------- */}
       <div className="bg-white p-7 md:p-9">
@@ -207,12 +209,12 @@ export function Calculadora() {
             infiltraciones y uso real del recinto.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/#cotizar"
+            <a
+              href="#agendar"
               className="bg-flame-500 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-flame-600"
             >
-              Cotizar con visita
-            </Link>
+              Agendar visita técnica
+            </a>
             <Link
               href="/equipos"
               className="border border-navy-500 px-6 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-navy-700"
@@ -221,6 +223,63 @@ export function Calculadora() {
             </Link>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div id="agendar" className="mt-16 scroll-mt-28">
+      <AgendarVisita metros={metros} />
+    </div>
+    </>
+  );
+}
+
+/*
+  El agendamiento vive en la misma página que el cálculo: mandar a un ancla de
+  la home obligaba a un salto entre páginas que además se desviaba, porque el
+  hero todavía estaba acomodando su imagen y sus fuentes cuando el navegador
+  saltaba.
+
+  El formulario recibe los m² que la persona ya escribió arriba y llega con
+  "Visita técnica en terreno" preseleccionado, así el lead llega con el
+  contexto del cálculo en vez de en blanco.
+*/
+function AgendarVisita({ metros }: { metros: string }) {
+  return (
+    <div className="grid gap-px bg-line lg:grid-cols-[1fr_1.2fr]">
+      <div className="bg-navy-800 p-7 md:p-9">
+        <p className="eyebrow">Agendar</p>
+        <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-none text-white md:text-4xl">
+          Que un técnico lo confirme en terreno
+        </h2>
+        <p className="mt-5 text-sm leading-7 text-steel-400">
+          La visita levanta lo que la calculadora no puede ver: aislación, materialidad,
+          superficie vidriada real, infiltraciones y por dónde pasan las líneas. Con eso sale
+          la capacidad definitiva y una cotización con precio cerrado.
+        </p>
+
+        <dl className="mt-8 border-t border-navy-600">
+          {[
+            ["Coordinación", "Te contactamos para acordar día y hora"],
+            ["En la visita", "Medición del recinto y revisión de la instalación"],
+            ["Después", "Cotización con capacidad definitiva y precio cerrado"],
+          ].map(([k, v]) => (
+            <div key={k} className="border-b border-navy-600 py-3.5">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-flame-500">
+                {k}
+              </dt>
+              <dd className="mt-1.5 text-sm leading-6 text-steel-400">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div className="bg-white p-7 md:p-9">
+        <QuoteForm
+          variant="plain"
+          superficieInicial={metros}
+          servicioInicial="Visita técnica en terreno"
+          ctaLabel="Agendar visita técnica"
+        />
       </div>
     </div>
   );

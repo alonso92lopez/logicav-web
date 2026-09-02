@@ -368,6 +368,10 @@ export const products: Product[] = [
 
 export const formOptions = {
   serviceTypes: [
+    /* Primera de la lista y con nombre propio: es la que preselecciona la
+       calculadora, y es el compromiso que el sitio puede cumplir de verdad
+       cuando alguien pide "agendar". */
+    "Visita técnica en terreno",
     "Contrato de mantención",
     "Mantención por una vez",
     "Reparación / equipo con falla",

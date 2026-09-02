@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Calculadora } from "@/components/Calculadora";
@@ -104,12 +103,12 @@ export default function CalculadoraPage() {
                 un local, una sala técnica o una faena— esos factores se levantan en visita, y
                 pueden mover el resultado un tramo completo en cualquier dirección.
               </p>
-              <Link
-                href="/#cotizar"
+              <a
+                href="#agendar"
                 className="mt-6 inline-flex bg-navy-800 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-flame-500"
               >
                 Agendar visita técnica
-              </Link>
+              </a>
             </div>
           </div>
         </section>
