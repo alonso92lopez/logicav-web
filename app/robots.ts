@@ -3,6 +3,6 @@ import type { MetadataRoute } from "next";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://logicav.cl/sitemap.xml",
+    sitemap: "https://www.logicav.cl/sitemap.xml",
   };
 }

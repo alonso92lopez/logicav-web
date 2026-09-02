@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Barlow_Condensed, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
 const barlow = Barlow_Condensed({
@@ -14,14 +14,6 @@ const plex = IBM_Plex_Sans({
   weight: ["400", "500", "600"],
   variable: "--font-plex",
   display: "swap",
-});
-
-/* Transitoria: solo la usan las clases .kicker y .step-num de la paleta
-   anterior, que se van cuando /equipos quede repintada. */
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
 });
 
 export const metadata: Metadata = {
@@ -65,10 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="es-CL"
-      className={`${barlow.variable} ${plex.variable} ${plexMono.variable}`}
-    >
+    <html lang="es-CL" className={`${barlow.variable} ${plex.variable}`}>
       <body>{children}</body>
     </html>
   );

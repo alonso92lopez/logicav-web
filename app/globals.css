@@ -33,35 +33,9 @@
   --radius-none: 0px;
 }
 
-/* ------------------------------------------------------------------
-   Tokens de la paleta anterior ("Azul ingeniería").
-   Siguen vivos solo mientras quedan pantallas sin repintar: la home
-   antigua y /equipos. Se eliminan en el último commit de la migración.
-   ------------------------------------------------------------------ */
-:root {
-  --paper: #ffffff;
-  --mist: #f6f8fa;
-  --ink: #1d2b38;
-  --ink-soft: #4b5d6e;
-  --ink-faint: #8494a3;
-  --accent: #0a66e8;
-  --accent-dark: #0852bc;
-  --accent-soft: #eaf1fd;
-}
-
 @theme inline {
-  --color-paper: var(--paper);
-  --color-mist: var(--mist);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-ink-faint: var(--ink-faint);
-  --color-accent: var(--accent);
-  --color-accent-dark: var(--accent-dark);
-  --color-accent-soft: var(--accent-soft);
-
   --font-display: var(--font-barlow), "Arial Narrow", Arial, sans-serif;
   --font-sans: var(--font-plex), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 @layer base {
@@ -121,20 +95,5 @@
     width: 2rem;
     height: 2px;
     background-color: #e8590c;
-  }
-
-  /* Clases de la paleta anterior. Transitorias: se eliminan cuando la
-     home y /equipos quedan repintadas. */
-  .kicker {
-    font-family: var(--font-plex-mono), monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  .step-num {
-    font-family: var(--font-plex-mono), monospace;
-    font-variant-numeric: tabular-nums;
   }
 }
