@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { MotionRoot } from "@/components/MotionRoot";
 import { contact, formatCLP, products } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -19,26 +18,24 @@ export default function EquiposPage() {
   return (
     <>
       <Header />
-      <MotionRoot />
 
       <main className="mx-auto max-w-6xl px-5 md:px-8">
         <section className="max-w-2xl pb-6 pt-16 md:pt-24">
-          <p className="kicker" data-reveal>
+          <p className="kicker">
             Suministro de equipos
           </p>
           <h1
             className="mt-3 font-display text-3xl font-bold tracking-tight md:text-5xl"
-            data-reveal
           >
             Equipos con instalación y mantención en un solo contrato.
           </h1>
-          <p className="mt-5 leading-8 text-ink-soft" data-reveal>
+          <p className="mt-5 leading-8 text-ink-soft">
             Split muro inverter de 9.000 a 24.000 BTU de Anwo, Midea y Clark.
             Los valores son referenciales por unidad, netos (+ IVA): para
             recambios o ampliaciones de parque cotizamos según cantidad,
             instalación y plan de mantención asociado.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3" data-reveal>
+          <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/#cotizar"
               className="rounded-md bg-accent px-6 py-3 font-semibold text-white transition-colors hover:bg-accent-dark"
@@ -63,13 +60,12 @@ export default function EquiposPage() {
             <h2 className="font-display text-xl font-bold tracking-tight text-ink-soft">
               {marca}
             </h2>
-            <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal-group>
+            <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {products
                 .filter((p) => p.marca === marca)
                 .map((p) => (
                   <article
                     key={p.slug}
-                    data-reveal-item
                     className="flex flex-col overflow-hidden rounded-lg border border-line"
                   >
                     <div className="relative h-44 w-full bg-mist">

@@ -42,12 +42,6 @@ html {
   }
 }
 
-/* Con Lenis activo (agrega la clase .lenis al html), el smooth nativo
-   compite con su animación y anula los saltos a #anclas */
-html.lenis {
-  scroll-behavior: auto;
-}
-
 body {
   background: var(--paper);
   color: var(--ink);
@@ -74,11 +68,4 @@ body {
 .step-num {
   font-family: var(--font-plex-mono), monospace;
   font-variant-numeric: tabular-nums;
-}
-
-/* Fallback si JS está degradado: todo visible, sin transforms pendientes */
-.no-js [data-reveal],
-.no-js [data-reveal-item] {
-  opacity: 1 !important;
-  transform: none !important;
 }

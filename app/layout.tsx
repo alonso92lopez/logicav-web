@@ -60,17 +60,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`no-js ${inter.variable} ${interTight.variable} ${plexMono.variable}`}
+      className={`${inter.variable} ${interTight.variable} ${plexMono.variable}`}
     >
-      <body>
-        {/* Quita el flag no-js apenas hay JS: los reveals solo se activan con JS presente */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.remove('no-js')`,
-          }}
-        />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

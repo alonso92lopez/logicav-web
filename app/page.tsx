@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { MotionRoot } from "@/components/MotionRoot";
-import { HeroVisual } from "@/components/HeroVisual";
 import { QuoteForm } from "@/components/QuoteForm";
 import {
   backing,
@@ -36,7 +34,6 @@ export default function Home() {
   return (
     <>
       <Header />
-      <MotionRoot />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -45,28 +42,26 @@ export default function Home() {
       />
 
       <main>
-        {/* ——— Hero + Servicios: bloque con pieza 3D sticky ——— */}
-        <div id="escena-scroll" className="relative mx-auto max-w-6xl px-5 md:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
-            {/* Columna izquierda: hero + servicios */}
+        {/* ——— Hero + Servicios ——— */}
+        <div className="relative mx-auto max-w-6xl px-5 md:px-8">
+          <div>
             <div>
               <section className="flex min-h-[calc(100vh-5rem)] flex-col justify-center py-14">
-                <p className="kicker" data-reveal>
+                <p className="kicker">
                   Climatización · Mantención · Proyectos — {contact.coverage}
                 </p>
                 <h1
                   className="mt-5 font-display text-4xl font-bold leading-[1.08] tracking-tight md:text-[3.4rem]"
-                  data-reveal
                 >
                   Mantención y climatización para instalaciones que no pueden
                   detenerse.
                 </h1>
-                <p className="mt-6 max-w-xl text-lg leading-8 text-ink-soft" data-reveal>
+                <p className="mt-6 max-w-xl text-lg leading-8 text-ink-soft">
                   Instalación, mantención preventiva y correctiva de aire
                   acondicionado para empresas, edificios e instituciones.
                   Ejecución ordenada, informe técnico y trazabilidad por equipo.
                 </p>
-                <div className="mt-8 flex flex-wrap gap-3" data-reveal>
+                <div className="mt-8 flex flex-wrap gap-3">
                   <Link
                     href="#cotizar"
                     className="rounded-md bg-accent px-6 py-3.5 font-semibold text-white transition-colors hover:bg-accent-dark"
@@ -81,17 +76,12 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Visual estático en móvil (la versión sticky es solo desktop) */}
-                <div className="mt-10 h-64 overflow-hidden rounded-lg border border-line bg-paper sm:h-80 lg:hidden">
-                  <HeroVisual />
-                </div>
-
-                <ul className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-6" data-reveal>
+                <ul className="mt-10 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-6">
                   {stats.map((s) => (
                     <li key={s.label}>
                       <p className="font-mono text-2xl font-medium text-ink">
                         {s.prefix}
-                        <span data-count={s.value}>{s.value}</span>
+                        <span>{s.value}</span>
                         {s.suffix ?? ""}
                       </p>
                       <p className="mt-1 text-xs leading-5 text-ink-faint">{s.label}</p>
@@ -102,12 +92,11 @@ export default function Home() {
 
               {/* Servicios */}
               <section id="servicios" className="pb-10">
-                <p className="kicker" data-reveal>
+                <p className="kicker">
                   Servicios
                 </p>
                 <h2
                   className="mt-3 max-w-lg font-display text-3xl font-bold tracking-tight md:text-4xl"
-                  data-reveal
                 >
                   Un solo proveedor para operar, mantener y proyectar.
                 </h2>
@@ -147,15 +136,6 @@ export default function Home() {
                 </div>
               </section>
             </div>
-
-            {/* Columna derecha: pieza 3D sticky (solo desktop) */}
-            <div className="hidden lg:block">
-              <div className="sticky top-20 h-[calc(100vh-5rem)] py-8">
-                <div className="h-full overflow-hidden rounded-lg border border-line bg-paper">
-                  <HeroVisual />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -165,9 +145,9 @@ export default function Home() {
             <p className="text-center font-mono text-xs uppercase tracking-[0.22em] text-ink-faint">
               Instalamos y mantenemos equipos de estas marcas
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-16 gap-y-8" data-reveal-group>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
               {brands.map((b) => (
-                <div key={b.alt} data-reveal-item>
+                <div key={b.alt}>
                   <Image
                     src={b.src}
                     alt={b.alt}
@@ -184,22 +164,21 @@ export default function Home() {
         {/* ——— Planes ——— */}
         <section id="planes" className="mx-auto max-w-6xl px-5 py-24 md:px-8">
           <div className="max-w-2xl">
-            <p className="kicker" data-reveal>
+            <p className="kicker">
               Planes de mantención
             </p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl" data-reveal>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
               Un contrato claro, sin letra chica técnica.
             </h2>
-            <p className="mt-4 leading-7 text-ink-soft" data-reveal>
+            <p className="mt-4 leading-7 text-ink-soft">
               {plans.note}
             </p>
           </div>
 
-          <div className="mt-12 grid gap-5 lg:grid-cols-3" data-reveal-group>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
             {plans.items.map((p) => (
               <div
                 key={p.id}
-                data-reveal-item
                 className={`flex flex-col rounded-lg border p-7 ${
                   p.featured ? "border-accent shadow-[0_8px_40px_-12px_rgba(10,102,232,0.25)]" : "border-line"
                 }`}
@@ -240,13 +219,13 @@ export default function Home() {
         <section id="metodologia" className="border-y border-line bg-mist">
           <div className="mx-auto max-w-6xl px-5 py-24 md:px-8">
             <div className="max-w-2xl">
-              <p className="kicker" data-reveal>
+              <p className="kicker">
                 Metodología
               </p>
-              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl" data-reveal>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
                 Cada mantención deja evidencia.
               </h2>
-              <p className="mt-4 leading-7 text-ink-soft" data-reveal>
+              <p className="mt-4 leading-7 text-ink-soft">
                 No trabajamos “a ojo”. Cada equipo tiene su pauta, cada visita su
                 checklist, y cada cierre su informe. Esa trazabilidad es la
                 diferencia entre un contrato de mantención y una promesa.
@@ -254,11 +233,10 @@ export default function Home() {
             </div>
 
             <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_360px]">
-              <ol className="space-y-0" data-reveal-group>
+              <ol className="space-y-0">
                 {methodology.map((m, i) => (
                   <li
                     key={m.num}
-                    data-reveal-item
                     className={`grid grid-cols-[64px_1fr] gap-5 py-7 ${
                       i < methodology.length - 1 ? "border-b border-line" : ""
                     }`}
@@ -275,7 +253,7 @@ export default function Home() {
               </ol>
 
               {/* Mock del informe técnico */}
-              <aside className="lg:pt-2" data-reveal>
+              <aside className="lg:pt-2">
                 <div className="sticky top-28 rounded-lg border border-line bg-paper p-6 shadow-[0_10px_40px_-16px_rgba(29,43,56,0.18)]">
                   <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
                     Informe técnico · Ejemplo
@@ -322,15 +300,15 @@ export default function Home() {
         {/* ——— Sectores y proyectos ——— */}
         <section id="proyectos" className="mx-auto max-w-6xl px-5 py-24 md:px-8">
           <div className="max-w-2xl">
-            <p className="kicker" data-reveal>
+            <p className="kicker">
               Sectores y trabajos
             </p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl" data-reveal>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
               Donde una falla de clima es un problema operativo.
             </h2>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-2.5" data-reveal>
+          <ul className="mt-8 flex flex-wrap gap-2.5">
             {sectors.map((s) => (
               <li
                 key={s}
@@ -341,11 +319,10 @@ export default function Home() {
             ))}
           </ul>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3" data-reveal-group>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {projects.map((p) => (
               <article
                 key={p.title}
-                data-reveal-item
                 className="overflow-hidden rounded-lg border border-line"
               >
                 <div className="relative h-52 w-full">
@@ -376,25 +353,24 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-5 py-24 md:px-8">
             <div className="grid gap-12 lg:grid-cols-[1fr_1fr]">
               <div>
-                <p className="kicker" data-reveal>
+                <p className="kicker">
                   Respaldo técnico
                 </p>
-                <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl" data-reveal>
+                <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
                   Quiénes ejecutan el trabajo.
                 </h2>
-                <p className="mt-5 max-w-xl leading-8 text-ink-soft" data-reveal>
+                <p className="mt-5 max-w-xl leading-8 text-ink-soft">
                   {backing.intro}
                 </p>
-                <p className="mt-6 font-mono text-sm text-ink-faint" data-reveal>
+                <p className="mt-6 font-mono text-sm text-ink-faint">
                   Operando desde {backing.since} · {contact.coverage}
                 </p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2" data-reveal-group>
+              <div className="grid gap-4 sm:grid-cols-2">
                 {backing.items.map((item) => (
                   <div
                     key={item.title}
-                    data-reveal-item
                     className="rounded-lg border border-line bg-paper p-6"
                   >
                     <h3 className="font-display text-base font-bold">{item.title}</h3>
@@ -410,18 +386,18 @@ export default function Home() {
         <section id="cotizar" className="mx-auto max-w-6xl px-5 py-24 md:px-8">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <p className="kicker" data-reveal>
+              <p className="kicker">
                 Cotización
               </p>
-              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl" data-reveal>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
                 Cuéntanos qué necesita tu instalación.
               </h2>
-              <p className="mt-5 max-w-md leading-7 text-ink-soft" data-reveal>
+              <p className="mt-5 max-w-md leading-7 text-ink-soft">
                 Con estos datos preparamos una cotización o coordinamos una
                 visita técnica para hacer el catastro de tus equipos.
               </p>
 
-              <dl className="mt-10 space-y-5 text-sm" data-reveal>
+              <dl className="mt-10 space-y-5 text-sm">
                 <div>
                   <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint">
                     WhatsApp
@@ -467,7 +443,7 @@ export default function Home() {
               </dl>
             </div>
 
-            <div className="rounded-lg border border-line p-6 md:p-8" data-reveal>
+            <div className="rounded-lg border border-line p-6 md:p-8">
               <QuoteForm />
             </div>
           </div>
