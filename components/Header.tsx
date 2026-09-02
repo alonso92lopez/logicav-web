@@ -11,6 +11,7 @@ import { contact } from "@/lib/content";
 const links = [
   { href: "/#servicios", label: "Servicios" },
   { href: "/equipos", label: "Equipos" },
+  { href: "/calculadora", label: "Calculadora" },
   { href: "/#proyectos", label: "Proyectos" },
   { href: "/#nosotros", label: "Nosotros" },
   { href: "/#contacto", label: "Contacto" },

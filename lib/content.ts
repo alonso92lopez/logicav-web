@@ -223,6 +223,8 @@ export type Product = {
   marca: string;
   slug: string;
   precioReferencia: number;
+  /* Precio lista anterior. Solo se muestra tachado si es mayor. */
+  precioNormal: number;
   descripcion: string;
   capacidadBtu: number;
   areaRecomendada: string;
@@ -235,6 +237,7 @@ export const products: Product[] = [
     marca: "ANWO",
     slug: "anwo-9000",
     precioReferencia: 326590,
+    precioNormal: 379990,
     descripcion: "Oficinas privadas y salas pequeñas",
     capacidadBtu: 9000,
     areaRecomendada: "hasta 15 m²",
@@ -245,6 +248,7 @@ export const products: Product[] = [
     marca: "ANWO",
     slug: "anwo-12000",
     precioReferencia: 352990,
+    precioNormal: 449990,
     descripcion: "Oficinas y locales medianos",
     capacidadBtu: 12000,
     areaRecomendada: "15–25 m²",
@@ -255,6 +259,7 @@ export const products: Product[] = [
     marca: "ANWO",
     slug: "anwo-18000",
     precioReferencia: 486590,
+    precioNormal: 579990,
     descripcion: "Espacios amplios y salas de reunión",
     capacidadBtu: 18000,
     areaRecomendada: "hasta 35 m²",
@@ -265,6 +270,7 @@ export const products: Product[] = [
     marca: "ANWO",
     slug: "anwo-24000",
     precioReferencia: 611990,
+    precioNormal: 699990,
     descripcion: "Áreas grandes y espacios comerciales",
     capacidadBtu: 24000,
     areaRecomendada: "35 m² o más",
@@ -275,6 +281,7 @@ export const products: Product[] = [
     marca: "MIDEA",
     slug: "midea-9000",
     precioReferencia: 275190,
+    precioNormal: 354990,
     descripcion: "Oficinas privadas y salas pequeñas",
     capacidadBtu: 9000,
     areaRecomendada: "hasta 15 m²",
@@ -285,6 +292,7 @@ export const products: Product[] = [
     marca: "MIDEA",
     slug: "midea-12000",
     precioReferencia: 280190,
+    precioNormal: 379990,
     descripcion: "Oficinas y locales medianos",
     capacidadBtu: 12000,
     areaRecomendada: "15–25 m²",
@@ -295,6 +303,7 @@ export const products: Product[] = [
     marca: "MIDEA",
     slug: "midea-18000",
     precioReferencia: 485090,
+    precioNormal: 519990,
     descripcion: "Espacios amplios y salas de reunión",
     capacidadBtu: 18000,
     areaRecomendada: "hasta 35 m²",
@@ -305,6 +314,7 @@ export const products: Product[] = [
     marca: "MIDEA",
     slug: "midea-24000",
     precioReferencia: 627990,
+    precioNormal: 699990,
     descripcion: "Áreas grandes y espacios comerciales",
     capacidadBtu: 24000,
     areaRecomendada: "35 m² o más",
@@ -315,6 +325,7 @@ export const products: Product[] = [
     marca: "CLARK",
     slug: "clark-9000",
     precioReferencia: 269150,
+    precioNormal: 344990,
     descripcion: "Oficinas privadas y salas pequeñas",
     capacidadBtu: 9000,
     areaRecomendada: "hasta 15 m²",
@@ -325,6 +336,7 @@ export const products: Product[] = [
     marca: "CLARK",
     slug: "clark-12000",
     precioReferencia: 270250,
+    precioNormal: 369990,
     descripcion: "Oficinas y locales medianos",
     capacidadBtu: 12000,
     areaRecomendada: "15–25 m²",
@@ -335,6 +347,7 @@ export const products: Product[] = [
     marca: "CLARK",
     slug: "clark-18000",
     precioReferencia: 475950,
+    precioNormal: 499990,
     descripcion: "Espacios amplios y salas de reunión",
     capacidadBtu: 18000,
     areaRecomendada: "hasta 35 m²",
@@ -345,6 +358,7 @@ export const products: Product[] = [
     marca: "CLARK",
     slug: "clark-24000",
     precioReferencia: 605990,
+    precioNormal: 675000,
     descripcion: "Áreas grandes y espacios comerciales",
     capacidadBtu: 24000,
     areaRecomendada: "35 m² o más",

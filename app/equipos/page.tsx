@@ -79,6 +79,11 @@ export default function EquiposPage() {
                           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                           className="object-contain p-4"
                         />
+                        {p.precioNormal > p.precioReferencia && (
+                          <span className="absolute left-0 top-0 bg-flame-500 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-white">
+                            −{Math.round((1 - p.precioReferencia / p.precioNormal) * 100)}%
+                          </span>
+                        )}
                       </div>
 
                       <div className="flex flex-1 flex-col p-5">
@@ -100,12 +105,19 @@ export default function EquiposPage() {
                             </dt>
                             <dd className="font-medium text-navy-800">{p.areaRecomendada}</dd>
                           </div>
-                          <div className="flex items-baseline justify-between py-1.5">
+                          <div className="flex items-baseline justify-between gap-2 py-1.5">
                             <dt className="text-xs uppercase tracking-[0.1em] text-steel-500">
                               Valor referencial
                             </dt>
-                            <dd className="font-display text-lg font-bold tabular-nums text-navy-800">
-                              {formatCLP(p.precioReferencia)}{" "}
+                            <dd className="text-right">
+                              {p.precioNormal > p.precioReferencia && (
+                                <span className="mr-2 text-sm tabular-nums text-steel-500 line-through">
+                                  {formatCLP(p.precioNormal)}
+                                </span>
+                              )}
+                              <span className="font-display text-lg font-bold tabular-nums text-navy-800">
+                                {formatCLP(p.precioReferencia)}
+                              </span>{" "}
                               <span className="text-xs font-normal text-steel-500">+ IVA</span>
                             </dd>
                           </div>

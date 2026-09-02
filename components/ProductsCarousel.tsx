@@ -76,6 +76,11 @@ export function ProductsCarousel() {
                   sizes="290px"
                   className="object-contain p-6"
                 />
+                {product.precioNormal > product.precioReferencia && (
+                  <span className="absolute left-0 top-0 bg-flame-500 px-2.5 py-1 text-[11px] font-semibold tabular-nums text-white">
+                    −{Math.round((1 - product.precioReferencia / product.precioNormal) * 100)}%
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-1 flex-col p-5">
@@ -103,10 +108,15 @@ export function ProductsCarousel() {
                 </dl>
 
                 <div className="mt-auto pt-5">
-                  <div className="flex items-baseline gap-2">
+                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                     <p className="font-display text-3xl font-bold leading-none tabular-nums text-navy-800">
                       {formatCLP(product.precioReferencia)}
                     </p>
+                    {product.precioNormal > product.precioReferencia && (
+                      <p className="text-sm tabular-nums text-steel-500 line-through">
+                        {formatCLP(product.precioNormal)}
+                      </p>
+                    )}
                     <p className="text-xs text-steel-500">+ IVA</p>
                   </div>
 
@@ -131,7 +141,7 @@ export function ProductsCarousel() {
             ¿No sabes qué capacidad necesitas? Dinos los m² y te lo calculamos.
           </p>
           <Link
-            href="#cotizar"
+            href="/calculadora"
             className="text-xs font-semibold uppercase tracking-[0.12em] text-flame-500 transition hover:text-flame-600"
           >
             Calcular capacidad →

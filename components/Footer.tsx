@@ -18,6 +18,7 @@ const columnas = [
       { label: "12.000 BTU", href: "/equipos" },
       { label: "18.000 BTU", href: "/equipos" },
       { label: "24.000 BTU", href: "/equipos" },
+      { label: "Calculadora de capacidad", href: "/calculadora" },
     ],
   },
   {

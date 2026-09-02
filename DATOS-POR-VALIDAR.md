@@ -87,6 +87,18 @@ visita. Validar que los tramos coincidan con el criterio del equipo técnico.
 Los valores referenciales salen del catálogo del sitio anterior (precios
 "oferta" de abril 2026). Confirmar vigencia.
 
+Desde el 2 sep 2026 se muestra además el **precio normal tachado** y el
+porcentaje de descuento, que van del −5 % al −27 % según el equipo. Eso sube
+la exigencia sobre el dato:
+
+- El precio tachado afirma que ese fue el valor vigente antes. En Chile el
+  precio de referencia en publicidad debe haber estado efectivamente vigente
+  en un período reciente. **Confirmar que ambos montos son reales y actuales
+  antes de dejarlo publicado mucho tiempo.**
+- Si la oferta ya no está vigente, la corrección no es bajar el tachado: es
+  igualar `precioNormal` a `precioReferencia` en `lib/content.ts`, y el
+  tachado desaparece solo.
+
 ## 9. Precios de servicios (`featuredServices`)
 
 Nuevos en el sitio con la Dirección A. Salen del mismo catálogo de abril 2026:
@@ -110,3 +122,23 @@ Afecta el `title`, la `description` y las keywords que ya estaban indexadas.
 
 Validar que la línea de minería e industrial refleje trabajo real y no una
 intención comercial.
+
+## 11. Calculadora de capacidad (`/calculadora`)
+
+Nueva desde el 2 sep 2026. Los tramos base son los del catálogo, ya validados
+por uso, pero **los cuatro factores de corrección son valores convencionales
+de la industria, no medidos por el equipo técnico de LOGICAV**:
+
+| Factor | Efecto |
+|---|---|
+| Altura de cielo | Proporcional sobre 2,4 m estándar |
+| Exposición al sol | −10 % poco · 0 % parcial · +15 % mucho |
+| Ocupación | +5 % por persona sobre 2 |
+| Equipos que generan calor | +15 % |
+
+Están en `lib/capacidad.ts`. **Que un técnico los confirme antes de promocionar
+la calculadora**, porque es la primera pieza del sitio que entrega un número
+técnico al visitante sin que medie una persona.
+
+La página dice explícitamente que no reemplaza un cálculo de carga térmica y
+que no considera aislación, materialidad ni infiltraciones.
