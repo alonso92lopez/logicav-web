@@ -9,8 +9,8 @@ export const contact = {
   phoneE164: "+56987066666",
   whatsapp: "https://wa.me/56987066666",
   email: "contacto@logicav.cl",
-  coverage: "Región Metropolitana", // [POR VALIDAR]
-  coverageDetail: "Santiago y comunas de la RM. Proyectos en otras regiones se evalúan caso a caso.", // [POR VALIDAR]
+  coverage: "Santiago y regiones", // [POR VALIDAR]
+  coverageDetail: "Base en la Región Metropolitana. Proyectos en regiones y faena se coordinan caso a caso.", // [POR VALIDAR]
   hours: "Lunes a viernes, 8:30 a 18:00 h", // [POR VALIDAR]
   hoursNote: "Atención de emergencias para clientes con contrato vigente.", // [POR VALIDAR]
 };
