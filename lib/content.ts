@@ -177,10 +177,23 @@ export const about = {
   since: "2019", // [POR VALIDAR]
 };
 
+/*
+  Marcas que se atienden. "Atendemos" es deliberado: describe instalar,
+  mantener y reparar, sin insinuar representación ni distribución. Ver
+  DATOS-POR-VALIDAR.md punto 4 antes de cambiar esa palabra.
+
+  Los archivos se normalizan con `python scripts/normalizar-logo.py <archivo>`,
+  que les quita el fondo, los recorta y los aplana a un solo tono. Un logo
+  sin pasar por ahí va a desentonar con el resto.
+
+  `scale` es corrección óptica: a igual altura, un wordmark ancho pesa mucho
+  más que una marca con símbolo. 1 es la altura base; el script imprime la
+  masa de tinta de cada archivo si hay que recalcularla.
+*/
 export const brands = [
-  { src: "/images/brands/anwo.png", alt: "Anwo" },
-  { src: "/images/brands/midea.png", alt: "Midea" },
-  { src: "/images/brands/clark.png", alt: "Clark" },
+  { src: "/images/brands/anwo.png", alt: "Anwo", scale: 1.15 },
+  { src: "/images/brands/midea.png", alt: "Midea", scale: 1.25 },
+  { src: "/images/brands/clark.png", alt: "Clark", scale: 0.76 },
 ];
 
 export type Product = {
