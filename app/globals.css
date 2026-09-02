@@ -51,9 +51,16 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* El header es sticky: los anclajes no deben quedar debajo. */
+  /* El header es sticky: los anclajes no deben quedar debajo. En móvil la
+     franja de servicio está oculta (md:block), así que el header mide menos. */
   [id] {
-    scroll-margin-top: 104px;
+    scroll-margin-top: 80px;
+  }
+
+  @media (width >= 48rem) {
+    [id] {
+      scroll-margin-top: 104px;
+    }
   }
 
   ::selection {

@@ -49,13 +49,15 @@ export function Header() {
             aria-label="LOGICAV — inicio"
             onClick={() => setOpen(false)}
           >
-            <div className="relative h-12 w-12 shrink-0 bg-white p-1">
+            {/* El PNG tiene fondo transparente: el cuadro blanco es de acá, no
+                del archivo, para que el chevrón navy tenga contraste. */}
+            <div className="relative h-12 w-12 shrink-0 bg-white">
               <Image
                 src="/images/brand/logo.png"
                 alt=""
                 fill
                 sizes="48px"
-                className="object-contain p-1"
+                className="object-contain p-2"
                 priority
               />
             </div>

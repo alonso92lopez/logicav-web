@@ -26,7 +26,9 @@ export function Hero() {
             Hogar · Empresas · Minería
           </p>
 
-          <h1 className="mt-5 font-display text-5xl font-bold uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
+          {/* text-4xl en móvil: a 48px la primera línea no cabe en 320px y el
+              salto forzado de abajo se pierde. */}
+          <h1 className="mt-5 font-display text-4xl font-bold uppercase leading-[0.95] text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Climatización que
             <br />
             opera <span className="text-flame-500">sin detenerse</span>
