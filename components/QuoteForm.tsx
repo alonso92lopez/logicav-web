@@ -1,42 +1,53 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useState } from "react";
 import { submitQuote, type QuoteState } from "@/lib/actions";
-import { formOptions, contact } from "@/lib/content";
+import { sugerirCapacidad } from "@/lib/capacidad";
+import { contact, formOptions } from "@/lib/content";
 
 const initialState: QuoteState = { status: "idle" };
 
-const inputCls =
-  "w-full rounded-md border border-line bg-paper px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
+const inputClass =
+  "w-full border border-line bg-white px-3 py-2.5 text-sm text-navy-800 placeholder-steel-500/70 transition focus:border-flame-500 focus:outline-none";
 
-const labelCls = "mb-1.5 block text-sm font-medium text-ink";
+const labelClass =
+  "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.12em] text-steel-500";
 
-export function QuoteForm() {
+/*
+  Un solo formulario para todo el sitio: el del hero y el de la sección de
+  contacto son el mismo componente en dos variantes.
+
+  - "card": columna angosta del hero, con marco y encabezado propios.
+  - "plain": ancho, dentro del panel blanco de la sección de contacto.
+
+  Envía a la server action `submitQuote` (correo por Resend). El diseño de
+  origen abría wa.me desde el cliente; eso se descartó para no tener dos
+  canales de leads.
+*/
+export function QuoteForm({ variant = "card" }: { variant?: "card" | "plain" }) {
   const [state, formAction, pending] = useActionState(submitQuote, initialState);
-  const serviceRef = useRef<HTMLSelectElement>(null);
+  const [metros, setMetros] = useState("");
 
-  // Preselección del plan cuando se llega desde "#planes" (?plan=...)
-  useEffect(() => {
-    const plan = new URLSearchParams(window.location.search).get("plan");
-    if (plan && serviceRef.current) {
-      serviceRef.current.value = "Contrato de mantención";
-    }
-  }, []);
+  const capacidad = sugerirCapacidad(metros);
+  const wide = variant === "plain";
+  const pairClass = wide ? "grid gap-4 md:grid-cols-2" : "grid gap-4";
+
+  const shell = wide
+    ? ""
+    : "border border-line bg-white p-6 shadow-[0_18px_40px_-18px_rgba(7,27,46,0.55)]";
 
   if (state.status === "ok") {
     return (
-      <div className="rounded-lg border border-line bg-mist p-8 text-center">
-        <p className="font-display text-xl font-bold text-ink">
+      <div className={wide ? "border border-line bg-shell p-8" : `${shell} text-center`}>
+        <p className="font-display text-2xl font-bold uppercase leading-none tracking-wide text-navy-800">
           Solicitud enviada
         </p>
-        <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-ink-soft">
-          {state.message}
-        </p>
+        <p className="mt-3 text-sm leading-7 text-steel-600">{state.message}</p>
         <a
           href={contact.whatsapp}
           target="_blank"
           rel="noreferrer"
-          className="mt-6 inline-block rounded-md border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
+          className="mt-6 inline-block border border-line px-5 py-3 text-xs font-semibold uppercase tracking-[0.1em] text-navy-800 transition hover:border-flame-500 hover:text-flame-500"
         >
           ¿Es urgente? Escríbenos por WhatsApp
         </a>
@@ -45,8 +56,19 @@ export function QuoteForm() {
   }
 
   return (
-    <form action={formAction} className="grid gap-4">
-      {/* Honeypot */}
+    <form action={formAction} className={shell}>
+      {!wide && (
+        <>
+          <p className="font-display text-2xl font-bold uppercase leading-none tracking-wide text-navy-800">
+            Cotiza en un minuto
+          </p>
+          <p className="mt-2 text-sm text-steel-600">
+            Te respondemos dentro del horario hábil.
+          </p>
+        </>
+      )}
+
+      {/* Honeypot anti-spam: un humano nunca lo llena */}
       <input
         type="text"
         name="empresa_web"
@@ -56,94 +78,115 @@ export function QuoteForm() {
         aria-hidden="true"
       />
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="q-nombre" className={labelCls}>
-            Nombre *
-          </label>
-          <input
-            id="q-nombre"
-            name="nombre"
-            required
-            autoComplete="name"
-            className={inputCls}
-            placeholder="Tu nombre"
-          />
+      <div className={`${wide ? "" : "mt-5"} flex flex-col gap-4`}>
+        <div className={pairClass}>
+          <div>
+            <label className={labelClass} htmlFor={`q-nombre-${variant}`}>
+              Nombre *
+            </label>
+            <input
+              id={`q-nombre-${variant}`}
+              name="nombre"
+              required
+              autoComplete="name"
+              placeholder="Tu nombre"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className={labelClass} htmlFor={`q-contacto-${variant}`}>
+              Teléfono o correo *
+            </label>
+            <input
+              id={`q-contacto-${variant}`}
+              name="contacto"
+              required
+              placeholder="+56 9 … o nombre@empresa.cl"
+              className={inputClass}
+            />
+          </div>
         </div>
+
+        <div className={pairClass}>
+          <div>
+            <label className={labelClass} htmlFor={`q-servicio-${variant}`}>
+              Servicio
+            </label>
+            <select
+              id={`q-servicio-${variant}`}
+              name="servicio"
+              defaultValue=""
+              className={inputClass}
+            >
+              <option value="">Selecciona el servicio</option>
+              {formOptions.serviceTypes.map((t) => (
+                <option key={t}>{t}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={labelClass} htmlFor={`q-superficie-${variant}`}>
+              Superficie (m²)
+            </label>
+            <input
+              id={`q-superficie-${variant}`}
+              name="superficie"
+              type="number"
+              min="1"
+              inputMode="numeric"
+              placeholder="Ej: 24"
+              value={metros}
+              onChange={(e) => setMetros(e.target.value)}
+              className={inputClass}
+            />
+          </div>
+        </div>
+
         <div>
-          <label htmlFor="q-contacto" className={labelCls}>
-            Teléfono o correo *
+          <label className={labelClass} htmlFor={`q-mensaje-${variant}`}>
+            ¿Qué necesitas?
           </label>
-          <input
-            id="q-contacto"
-            name="contacto"
-            required
-            className={inputCls}
-            placeholder="+56 9 … o nombre@empresa.cl"
+          <textarea
+            id={`q-mensaje-${variant}`}
+            name="mensaje"
+            rows={wide ? 4 : 3}
+            placeholder="Ej: 8 equipos split en oficinas en Providencia, para contrato de mantención."
+            className={`${inputClass} resize-none`}
           />
         </div>
       </div>
 
-      <div>
-        <label htmlFor="q-servicio" className={labelCls}>
-          Servicio <span className="font-normal text-ink-faint">(opcional)</span>
-        </label>
-        <select
-          id="q-servicio"
-          name="servicio"
-          className={inputCls}
-          defaultValue=""
-          ref={serviceRef}
-        >
-          <option value="">Selecciona el servicio</option>
-          {formOptions.serviceTypes.map((t) => (
-            <option key={t}>{t}</option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="q-msg" className={labelCls}>
-          ¿Qué necesitas?
-        </label>
-        <textarea
-          id="q-msg"
-          name="mensaje"
-          rows={4}
-          className={inputCls}
-          placeholder="Ej: tenemos 8 equipos split en oficinas en Providencia y necesitamos un contrato de mantención…"
-        />
+      {/* La sugerencia aparece al escribir los m²: es el gesto que dice
+          "esto lo saben calcular". */}
+      <div
+        aria-live="polite"
+        className="mt-4 flex items-baseline justify-between gap-3 border-l-2 border-flame-500 bg-shell px-4 py-3"
+      >
+        <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-steel-500">
+          Capacidad orientativa
+        </span>
+        <span className="font-display text-xl font-bold tabular-nums text-navy-800">
+          {capacidad ?? "—"}
+        </span>
       </div>
 
       {state.status === "error" && (
-        <p className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="mt-4 border-l-2 border-flame-600 bg-flame-50 px-4 py-3 text-sm leading-6 text-navy-800">
           {state.message}
         </p>
       )}
 
-      <div className="mt-1 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-dark disabled:opacity-60"
-        >
-          {pending ? "Enviando…" : "Enviar solicitud"}
-        </button>
-        <p className="text-xs leading-5 text-ink-faint">
-          Respondemos dentro del horario hábil ({contact.hours.toLowerCase()}).
-        </p>
-      </div>
+      <button
+        type="submit"
+        disabled={pending}
+        className="mt-4 w-full bg-flame-500 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-flame-600 disabled:opacity-60"
+      >
+        {pending ? "Enviando…" : "Solicitar cotización"}
+      </button>
 
-      <p className="text-sm text-ink-soft">
-        ¿Prefieres escribirnos directo?{" "}
-        <a
-          href={contact.whatsapp}
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold text-ink underline decoration-line underline-offset-4 transition-colors hover:text-accent"
-        >
-          Háblanos por WhatsApp
-        </a>
+      <p className="mt-3 text-[11px] leading-relaxed text-steel-500">
+        La capacidad definitiva se confirma en visita técnica, con cálculo de carga térmica.
+        Respondemos dentro del horario hábil ({contact.hours.toLowerCase()}).
       </p>
     </form>
   );

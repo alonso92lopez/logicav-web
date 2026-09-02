@@ -9,6 +9,8 @@ export type Lead = {
   comuna: string;
   servicio: string;
   urgencia: string;
+  superficie: string;
+  capacidadSugerida: string;
   mensaje: string;
 };
 
@@ -51,7 +53,14 @@ export async function sendLeadEmail(lead: Lead): Promise<void> {
       ${row("Comuna", lead.comuna)}
       ${row("Servicio", lead.servicio)}
       ${row("Urgencia", lead.urgencia)}
+      ${row("Superficie", lead.superficie)}
+      ${row("Capacidad orientativa", lead.capacidadSugerida)}
     </table>
+    ${
+      lead.capacidadSugerida
+        ? `<p style="margin:12px 0 0;color:#8494a3;font-size:12px">La capacidad es orientativa por superficie. Se confirma en visita con cálculo de carga térmica.</p>`
+        : ""
+    }
     ${
       lead.mensaje
         ? `<p style="margin:16px 0 4px;color:#4b5d6e;font-size:13px">Mensaje:</p>

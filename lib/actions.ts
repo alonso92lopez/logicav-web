@@ -1,5 +1,7 @@
 "use server";
 
+import { sugerirCapacidad } from "./capacidad";
+
 export type QuoteState = {
   status: "idle" | "ok" | "error";
   message?: string;
@@ -27,6 +29,12 @@ export async function submitQuote(
 
   const esCorreo = contacto.includes("@");
 
+  // La superficie llega como texto libre; la capacidad se recalcula acá y no
+  // se lee del formulario, para que el correo no dependa de lo que mandó el
+  // cliente.
+  const superficie = String(formData.get("superficie") ?? "").trim();
+  const capacidadSugerida = sugerirCapacidad(superficie);
+
   const lead = {
     fecha: new Date().toLocaleString("es-CL", { timeZone: "America/Santiago" }),
     nombre,
@@ -38,6 +46,8 @@ export async function submitQuote(
     comuna: "",
     servicio: String(formData.get("servicio") ?? ""),
     urgencia: "",
+    superficie: capacidadSugerida ? `${Number(superficie)} m²` : "",
+    capacidadSugerida: capacidadSugerida ?? "",
     mensaje: String(formData.get("mensaje") ?? "").trim(),
   };
 
