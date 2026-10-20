@@ -47,7 +47,7 @@ export async function sendLeadEmail(lead: Lead): Promise<void> {
       ${row("Nombre", lead.nombre)}
       ${row("Empresa / institución", lead.organizacion)}
       ${row("Correo", lead.email)}
-      ${row("Teléfono", lead.telefono)}
+      ${row("Teléfono / WhatsApp", lead.telefono)}
       ${row("Tipo de instalación", lead.tipoInstalacion)}
       ${row("Cantidad de equipos", lead.cantidadEquipos)}
       ${row("Comuna", lead.comuna)}
@@ -69,7 +69,11 @@ export async function sendLeadEmail(lead: Lead): Promise<void> {
            )}</p>`
         : ""
     }
-    <p style="margin:18px 0 0;color:#8494a3;font-size:12px">Puedes responder directamente a este correo: le llegará al solicitante.</p>
+    <p style="margin:18px 0 0;color:#8494a3;font-size:12px">${
+      lead.email
+        ? "Puedes responder directamente a este correo: le llegará al solicitante."
+        : "Sin correo: contactar por teléfono o WhatsApp."
+    }</p>
   </div>`;
 
   const res = await fetch("https://api.resend.com/emails", {

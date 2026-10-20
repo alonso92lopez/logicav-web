@@ -1,6 +1,7 @@
 "use server";
 
 import { sugerirCapacidad } from "./capacidad";
+import { esCorreoValido } from "./email";
 
 export type QuoteState = {
   status: "idle" | "ok" | "error";
@@ -17,17 +18,22 @@ export async function submitQuote(
   }
 
   const nombre = String(formData.get("nombre") ?? "").trim();
-  const contacto = String(formData.get("contacto") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim();
+  const telefono = String(formData.get("telefono") ?? "").trim();
 
-  if (!nombre || !contacto) {
+  if (!nombre || !email) {
     return {
       status: "error",
-      message:
-        "Necesitamos tu nombre y un dato de contacto (teléfono o correo).",
+      message: "Necesitamos tu nombre y tu correo para responderte.",
     };
   }
 
-  const esCorreo = contacto.includes("@");
+  if (!esCorreoValido(email)) {
+    return {
+      status: "error",
+      message: "Revisa tu correo: debe tener la forma nombre@empresa.cl.",
+    };
+  }
 
   // La superficie llega como texto libre; la capacidad se recalcula acá y no
   // se lee del formulario, para que el correo no dependa de lo que mandó el
@@ -39,8 +45,8 @@ export async function submitQuote(
     fecha: new Date().toLocaleString("es-CL", { timeZone: "America/Santiago" }),
     nombre,
     organizacion: "",
-    email: esCorreo ? contacto : "",
-    telefono: esCorreo ? "" : contacto,
+    email,
+    telefono,
     tipoInstalacion: "",
     cantidadEquipos: "",
     comuna: "",

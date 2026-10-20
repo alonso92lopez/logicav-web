@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 import { submitQuote, type QuoteState } from "@/lib/actions";
 import { sugerirCapacidad } from "@/lib/capacidad";
+import { EMAIL_PATTERN } from "@/lib/email";
 import { contact, formOptions } from "@/lib/content";
 
 const initialState: QuoteState = { status: "idle" };
@@ -101,29 +102,51 @@ export function QuoteForm({
       />
 
       <div className={`${wide ? "" : "mt-5"} flex flex-col gap-4`}>
+        <div>
+          <label className={labelClass} htmlFor={`q-nombre-${variant}`}>
+            Nombre *
+          </label>
+          <input
+            id={`q-nombre-${variant}`}
+            name="nombre"
+            required
+            autoComplete="name"
+            placeholder="Tu nombre"
+            className={inputClass}
+          />
+        </div>
+
+        {/* Correo y teléfono separados: con un solo campo un cliente dejó solo
+            el teléfono y no hubo cómo responderle por correo. El patrón es el
+            mismo que valida `submitQuote`, para que el navegador no deje pasar
+            algo que el servidor va a rechazar. */}
         <div className={pairClass}>
           <div>
-            <label className={labelClass} htmlFor={`q-nombre-${variant}`}>
-              Nombre *
+            <label className={labelClass} htmlFor={`q-email-${variant}`}>
+              Correo *
             </label>
             <input
-              id={`q-nombre-${variant}`}
-              name="nombre"
+              id={`q-email-${variant}`}
+              name="email"
+              type="email"
               required
-              autoComplete="name"
-              placeholder="Tu nombre"
+              pattern={EMAIL_PATTERN}
+              autoComplete="email"
+              placeholder="nombre@empresa.cl"
               className={inputClass}
             />
           </div>
           <div>
-            <label className={labelClass} htmlFor={`q-contacto-${variant}`}>
-              Teléfono o correo *
+            <label className={labelClass} htmlFor={`q-telefono-${variant}`}>
+              Teléfono / WhatsApp
             </label>
             <input
-              id={`q-contacto-${variant}`}
-              name="contacto"
-              required
-              placeholder="+56 9 … o nombre@empresa.cl"
+              id={`q-telefono-${variant}`}
+              name="telefono"
+              type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              placeholder="+56 9 …"
               className={inputClass}
             />
           </div>
