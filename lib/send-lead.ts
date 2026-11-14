@@ -12,6 +12,10 @@ export type Lead = {
   superficie: string;
   capacidadSugerida: string;
   mensaje: string;
+  /* Solo en leads de una página de rubro: nombre del rubro y sus campos
+     propios como pares [etiqueta, valor]. */
+  rubro: string;
+  extras: [string, string][];
 };
 
 const esc = (s: string) =>
@@ -33,7 +37,7 @@ export async function sendLeadEmail(lead: Lead): Promise<void> {
   const domain = process.env.RESEND_EMAIL_DOMAIN ?? "logicav.cl";
   const to = process.env.LEAD_TO_EMAIL ?? "contactologicav@gmail.com";
 
-  const subject = `Cotización web: ${lead.nombre}${
+  const subject = `Cotización web${lead.rubro ? ` [${lead.rubro}]` : ""}: ${lead.nombre}${
     lead.organizacion ? ` (${lead.organizacion})` : ""
   }${lead.urgencia.startsWith("Urgente") ? " — URGENTE" : ""}`;
 
@@ -52,6 +56,7 @@ export async function sendLeadEmail(lead: Lead): Promise<void> {
       ${row("Cantidad de equipos", lead.cantidadEquipos)}
       ${row("Comuna", lead.comuna)}
       ${row("Servicio", lead.servicio)}
+      ${lead.extras.map(([label, value]) => row(label, value)).join("")}
       ${row("Urgencia", lead.urgencia)}
       ${row("Superficie", lead.superficie)}
       ${row("Capacidad orientativa", lead.capacidadSugerida)}

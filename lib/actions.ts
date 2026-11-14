@@ -2,6 +2,7 @@
 
 import { sugerirCapacidad } from "./capacidad";
 import { esCorreoValido } from "./email";
+import { getRubro } from "./rubros";
 
 export type QuoteState = {
   status: "idle" | "ok" | "error";
@@ -41,6 +42,16 @@ export async function submitQuote(
   const superficie = String(formData.get("superficie") ?? "").trim();
   const capacidadSugerida = sugerirCapacidad(superficie);
 
+  // Página de rubro: el servicio y los campos propios salen del registro,
+  // no de lo que diga el formulario.
+  const rubro = getRubro(String(formData.get("rubro") ?? ""));
+  const extras: [string, string][] = rubro
+    ? rubro.formulario.campos.map((c) => [
+        c.label,
+        String(formData.get(`extra_${c.name}`) ?? "").trim(),
+      ])
+    : [];
+
   const lead = {
     fecha: new Date().toLocaleString("es-CL", { timeZone: "America/Santiago" }),
     nombre,
@@ -50,7 +61,9 @@ export async function submitQuote(
     tipoInstalacion: "",
     cantidadEquipos: "",
     comuna: "",
-    servicio: String(formData.get("servicio") ?? ""),
+    servicio: rubro ? rubro.formulario.servicio : String(formData.get("servicio") ?? ""),
+    rubro: rubro?.nombre ?? "",
+    extras,
     urgencia: "",
     superficie: capacidadSugerida ? `${Number(superficie)} m²` : "",
     capacidadSugerida: capacidadSugerida ?? "",

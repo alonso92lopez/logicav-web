@@ -63,13 +63,15 @@
     }
   }
 
+  /* Con variable y no con el valor fijo: en un sitio de rubro el acento es
+     otro (ver lib/rubros/tema.ts). */
   ::selection {
-    background-color: #e8590c;
+    background-color: var(--color-flame-500);
     color: #ffffff;
   }
 
   :focus-visible {
-    outline: 2px solid #e8590c;
+    outline: 2px solid var(--color-flame-500);
     outline-offset: 2px;
   }
 
@@ -93,7 +95,7 @@
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #e8590c;
+    color: var(--color-flame-500);
   }
 
   /* Regla naranja corta que abre bloques. Sustituye a los íconos. */
@@ -101,6 +103,15 @@
     display: block;
     width: 2rem;
     height: 2px;
-    background-color: #e8590c;
+    background-color: var(--color-flame-500);
+  }
+
+  /* Sitios de rubro con motivo de ondas (ver lib/rubros/tema.ts): la regla
+     recta pasa a ser una ola, del color de acento del rubro. */
+  [data-motivo="ondas"] .rule {
+    width: 2.75rem;
+    height: 9px;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 9'%3E%3Cpath d='M1.5 4.5 q5.125 -6 10.25 0 t10.25 0 t10.25 0 t10.25 0' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")
+      center / contain no-repeat;
   }
 }
