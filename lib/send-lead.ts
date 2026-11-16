@@ -18,7 +18,7 @@ export type Lead = {
   extras: [string, string][];
 };
 
-const esc = (s: string) =>
+export const esc = (s: string) =>
   s
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

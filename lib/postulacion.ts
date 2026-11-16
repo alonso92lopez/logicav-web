@@ -126,5 +126,14 @@ export async function submitPostulacion(
     return caida;
   }
 
+  // Aviso por correo. La ficha ya está guardada: si el correo falla, la
+  // postulación igual cuenta y el técnico ve "enviada".
+  try {
+    const { sendPostulacionEmail } = await import("./send-postulacion");
+    await sendPostulacionEmail(cuerpo);
+  } catch (err) {
+    console.error("[LOGICAV] Postulación guardada, pero falló el aviso por correo:", err);
+  }
+
   return { status: "ok", message: trabaja.gracias };
 }
