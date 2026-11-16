@@ -382,6 +382,62 @@ export const formOptions = {
   ],
 };
 
+/*
+  /trabaja: reclutamiento de técnicos (16-11-2026). Fuera del menú y sin
+  indexar mientras dure el experimento; se llega por el link que manda Alonso.
+  Solo lo verdadero: nada de prometer volumen de trabajo.
+*/
+export const trabaja = {
+  eyebrow: "Trabaja con nosotros · Climatización",
+  titulo: ["Trabajos de climatización", "para técnicos independientes"],
+  intro:
+    "Logicav hace mantenciones e instalaciones para organismos públicos: universidades, hospitales y ministerios. Estamos sumando técnicos en la Región Metropolitana.",
+  puntos: [
+    { titulo: "Organismos públicos", texto: "Mantenciones e instalaciones en instituciones públicas." },
+    { titulo: "Pago todos los viernes", texto: "Pagamos todos los viernes." },
+    { titulo: "Respaldo de empresa", texto: "Trabajas con una empresa detrás." },
+    {
+      titulo: "Más trabajo si lo haces bien",
+      texto: "Quien trabaja bien recibe más trabajos y de mayor monto.",
+    },
+  ],
+  formTitulo: "Postula",
+  formTexto: "Toma un par de minutos.",
+  gracias:
+    "Recibimos tus datos. Si aparece un trabajo que calce contigo, te escribimos por WhatsApp.",
+  /* Los documentos no se suben a la página: van por correo a una dirección
+     propia (Cloudflare Email Routing → contactologicav@gmail.com, etiqueta
+     "Postulaciones" en Gmail; 16-11-2026). */
+  documentos: {
+    correo: "postulaciones@logicav.cl",
+    aviso:
+      "¿Tienes CV, certificados o fotos de tus trabajos? Al enviar la postulación te mostramos a qué correo mandarlos.",
+    despues:
+      "¿Tienes CV, certificados o fotos de tus trabajos? Mándalos por correo, con tu nombre en el asunto.",
+    boton: "Enviar CV o certificados por correo",
+    cuerpo: "Hola, adjunto mis documentos para la postulación.\n\n(Adjunta tu CV, certificados u otros antes de enviar.)",
+  },
+  trabajos: [
+    { valor: "instalacion", label: "Instalación" },
+    { valor: "mantencion", label: "Mantención" },
+    { valor: "reparacion", label: "Reparación" },
+    { valor: "vrv_chiller", label: "VRV o chiller" },
+  ],
+  /* Las 52 comunas de la RM. La misma lista valida el servicio que guarda
+     (logicav_ops_platform/intel/rrhh/postulaciones_web/main.py): si cambia
+     una, cambiar la otra. */
+  comunas: [
+    "Alhué", "Buin", "Calera de Tango", "Cerrillos", "Cerro Navia", "Colina", "Conchalí",
+    "Curacaví", "El Bosque", "El Monte", "Estación Central", "Huechuraba", "Independencia",
+    "Isla de Maipo", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina",
+    "Lampa", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú",
+    "María Pinto", "Melipilla", "Ñuñoa", "Padre Hurtado", "Paine", "Pedro Aguirre Cerda",
+    "Peñaflor", "Peñalolén", "Pirque", "Providencia", "Pudahuel", "Puente Alto", "Quilicura",
+    "Quinta Normal", "Recoleta", "Renca", "San Bernardo", "San Joaquín", "San José de Maipo",
+    "San Miguel", "San Pedro", "San Ramón", "Santiago", "Talagante", "Tiltil", "Vitacura",
+  ],
+};
+
 export const formatCLP = (value: number) =>
   new Intl.NumberFormat("es-CL", {
     style: "currency",
