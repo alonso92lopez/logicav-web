@@ -33,7 +33,8 @@ function SiNo({ name, legend }: { name: string; legend: string }) {
 }
 
 /*
-  Formulario de /trabaja. Las preguntas las decidió Alonso: no agregar.
+  Formulario de /trabaja. Las preguntas las decide Alonso: no agregar sin él
+  (sumó el correo y el texto libre, ambos opcionales, el 16-11-2026).
   Envía a `submitPostulacion`, que se la pasa al servicio que guarda.
 
   Se envía con onSubmit + startTransition en vez de `action={...}`: así React
@@ -44,10 +45,11 @@ export function TrabajaForm({ origen, codigo }: { origen: string; codigo: string
   const [state, formAction, pending] = useActionState(submitPostulacion, initialState);
   const [finde, setFinde] = useState<string[]>([]);
   const [aviso, setAviso] = useState("");
+  const [texto, setTexto] = useState("");
   // Para el asunto del correo con documentos: así se ubica su ficha en el panel.
   const [quien, setQuien] = useState({ nombre: "", telefono: "" });
 
-  const { documentos } = trabaja;
+  const { documentos, comentario } = trabaja;
 
   if (state.status === "ok") {
     const asunto = ["Postulación", quien.nombre, quien.telefono].filter(Boolean).join(" – ");
@@ -250,6 +252,28 @@ export function TrabajaForm({ origen, codigo }: { origen: string; codigo: string
             ))}
           </div>
         </fieldset>
+
+        <div>
+          <label className={labelClass} htmlFor="t-comentario">
+            {comentario.label} <span className="font-normal text-steel-500">(opcional)</span>
+          </label>
+          <textarea
+            id="t-comentario"
+            name="comentario"
+            rows={4}
+            maxLength={comentario.max}
+            value={texto}
+            onChange={(e) => setTexto(e.target.value)}
+            placeholder={comentario.placeholder}
+            className={`${inputClass} resize-y leading-6`}
+          />
+          <div className="mt-1.5 flex justify-between gap-4 text-xs leading-5 text-steel-500">
+            <span>{comentario.aviso}</span>
+            <span className="shrink-0 tabular-nums" aria-live="polite">
+              {texto.length}/{comentario.max}
+            </span>
+          </div>
+        </div>
 
         <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-steel-600">
           <input

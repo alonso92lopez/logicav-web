@@ -12,6 +12,7 @@ export type PostulacionAviso = {
   nombre: string;
   telefono: string; // 569XXXXXXXX
   correo: string;
+  comentario: string;
   comuna: string;
   mayor_18: string;
   cedula_chilena: string;
@@ -67,6 +68,14 @@ export async function sendPostulacionEmail(p: PostulacionAviso): Promise<void> {
       ${fila("Fuente", p.origen)}
       ${p.ref ? fila("Link personal", "sí (completó su ficha)") : ""}
     </table>
+    ${
+      p.comentario
+        ? `<p style="margin:16px 0 4px;color:#4b5d6e;font-size:13px">Nos cuenta:</p>
+           <p style="margin:0;padding:12px;background:#f6f8fa;color:#1d2b38;font-size:14px;white-space:pre-line">${esc(
+             p.comentario
+           )}</p>`
+        : ""
+    }
     <p style="margin:18px 0 0">
       <a href="https://wa.me/${esc(p.telefono)}" style="color:#c9490a;font-weight:600">Escribirle por WhatsApp</a>
     </p>

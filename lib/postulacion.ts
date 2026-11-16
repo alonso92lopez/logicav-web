@@ -76,11 +76,18 @@ export async function submitPostulacion(
     return falla("Necesitamos tu autorización para guardar tus datos.");
   }
 
+  // Texto libre opcional. El servicio lo limpia y revisa el tope de nuevo.
+  const comentario = texto("comentario").replace(/\r\n?/g, "\n");
+  if (comentario.length > trabaja.comentario.max) {
+    return falla(`Lo que nos cuentas puede tener hasta ${trabaja.comentario.max} caracteres.`);
+  }
+
   const origen = texto("origen");
   const cuerpo = {
     nombre,
     telefono,
     correo,
+    comentario,
     comuna,
     mayor_18: mayor18,
     cedula_chilena: cedula,

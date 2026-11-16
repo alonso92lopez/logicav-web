@@ -63,16 +63,29 @@ export default async function TrabajaPage({
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-steel-400">{trabaja.intro}</p>
 
-            <dl className="mt-8 grid gap-x-10 gap-y-6 border-t border-navy-600 pt-8 sm:grid-cols-2">
-              {trabaja.puntos.map((p) => (
-                <div key={p.titulo} className="border-l-2 border-flame-500 pl-4">
-                  <dt className="font-display text-xl font-bold uppercase leading-none tracking-wide text-white">
-                    {p.titulo}
-                  </dt>
-                  <dd className="mt-2 text-sm leading-6 text-steel-400">{p.texto}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="mt-8 border-t border-navy-600 pt-8">
+              <h2 className="font-display text-sm font-bold uppercase tracking-[0.18em] text-steel-400">
+                {trabaja.pasosTitulo}
+              </h2>
+              <ol className="mt-5 grid gap-6 sm:grid-cols-3 sm:gap-8">
+                {trabaja.pasos.map((p, i) => (
+                  <li key={p.titulo} className="flex gap-4 sm:block">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-flame-500 font-display text-xl font-bold text-white">
+                      {i + 1}
+                    </span>
+                    <div className="sm:mt-4">
+                      <p className="font-display text-xl font-bold uppercase leading-none tracking-wide text-white">
+                        {p.titulo}
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-steel-400">{p.texto}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-8 border-l-2 border-flame-500 pl-4 text-base font-semibold text-white">
+                {trabaja.nota}
+              </p>
+            </div>
           </div>
         </section>
 

@@ -392,15 +392,18 @@ export const trabaja = {
   titulo: ["Trabajos de climatización", "para técnicos independientes"],
   intro:
     "Logicav hace mantenciones e instalaciones para organismos públicos: universidades, hospitales y ministerios. Estamos sumando técnicos en la Región Metropolitana.",
-  puntos: [
-    { titulo: "Organismos públicos", texto: "Mantenciones e instalaciones en instituciones públicas." },
-    { titulo: "Pago todos los viernes", texto: "Pagamos todos los viernes." },
-    { titulo: "Respaldo de empresa", texto: "Trabajas con una empresa detrás." },
+  /* "Cómo funciona" (16-11-2026). Regla de RRHH: no prometer volumen de
+     trabajo; por eso el paso 2 dice "cuando hay". */
+  pasosTitulo: "Cómo funciona",
+  pasos: [
+    { titulo: "Postulas", texto: "Llenas el formulario de abajo. Toma un par de minutos." },
     {
-      titulo: "Más trabajo si lo haces bien",
-      texto: "Quien trabaja bien recibe más trabajos y de mayor monto.",
+      titulo: "Te escribimos",
+      texto: "Cuando hay un trabajo en tu zona que calce contigo, te contactamos por WhatsApp.",
     },
+    { titulo: "Trabajas y cobras", texto: "Haces el trabajo y te pagamos el viernes." },
   ],
+  nota: "Quien trabaja bien recibe más trabajos y de mayor monto.",
   formTitulo: "Postula",
   formTexto: "Toma un par de minutos.",
   gracias:
@@ -416,6 +419,15 @@ export const trabaja = {
       "¿Tienes CV, certificados o fotos de tus trabajos? Mándalos por correo, con tu nombre en el asunto.",
     boton: "Enviar CV o certificados por correo",
     cuerpo: "Hola, adjunto mis documentos para la postulación.\n\n(Adjunta tu CV, certificados u otros antes de enviar.)",
+  },
+  /* Texto libre opcional (Alonso, 16-11-2026). El tope lo vuelve a revisar
+     el servicio que guarda (COMENTARIO_MAX en main.py). */
+  comentario: {
+    label: "¿Algo más que quieras contarnos?",
+    placeholder:
+      "Ej.: años de experiencia, certificaciones (SEC, manejo de refrigerantes), marcas que conoces, si tienes herramientas propias.",
+    aviso: "No pongas tu RUT ni datos bancarios.",
+    max: 1000,
   },
   trabajos: [
     { valor: "instalacion", label: "Instalación" },
