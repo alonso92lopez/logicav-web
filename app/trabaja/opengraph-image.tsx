@@ -8,6 +8,11 @@ import { trabaja } from "@/lib/content";
   RRHH, 16-11-2026). Se genera con la letra del sitio (Barlow Condensed,
   licencia OFL en assets/fonts/OFL.txt) y sin fotos.
 */
+/* La URL de la imagen lleva un código que Next saca de ESTE archivo, no de
+   content.ts. Si cambia el texto de la tarjeta, subir VERSION: así cambia la
+   URL y Facebook no sigue mostrando la imagen vieja.
+   v2 (16-11-2026): pie «Pago todos los viernes · Postula en 2 minutos». */
+const VERSION = 2;
 export const alt = trabaja.compartir.titulo;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -27,6 +32,7 @@ export default async function Image() {
   return new ImageResponse(
     (
       <div
+        data-version={VERSION}
         style={{
           width: "100%",
           height: "100%",

@@ -400,7 +400,7 @@ export const trabaja = {
     titulo: "Trabajos de climatización para técnicos · Santiago, Chile",
     descripcion:
       "Mantenciones e instalaciones para organismos públicos. Pago todos los viernes. Postula en 2 minutos.",
-    imagenPie: "Pago todos los viernes · Organismos públicos",
+    imagenPie: "Pago todos los viernes · Postula en 2 minutos",
   },
   /* "Cómo funciona" (16-11-2026). Regla de RRHH: no prometer volumen de
      trabajo; por eso el paso 2 dice "cuando hay". */
