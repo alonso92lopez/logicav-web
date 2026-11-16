@@ -27,6 +27,8 @@ const columnas = [
       { label: "Nosotros", href: "/#nosotros" },
       { label: "Proyectos", href: "/#proyectos" },
       { label: "Contacto", href: "/#contacto" },
+      // Solo en el pie, no en el menú: el menú es para clientes (Alonso, 16-11-2026).
+      { label: "Trabaja con nosotros", href: "/trabaja" },
     ],
   },
 ];
