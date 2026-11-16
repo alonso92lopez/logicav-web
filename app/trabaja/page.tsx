@@ -16,9 +16,24 @@ import { trabaja } from "@/lib/content";
 */
 export const metadata: Metadata = {
   title: "Trabaja con nosotros",
-  description: "Técnicos de climatización: postula para recibir trabajos de Logicav.",
+  description: trabaja.compartir.descripcion,
   alternates: { canonical: "/trabaja" },
   robots: { index: false, follow: false },
+  // La imagen sale de opengraph-image.tsx (Next la agrega sola). openGraph de
+  // la página reemplaza completo al del layout: por eso se repite todo.
+  openGraph: {
+    type: "website",
+    locale: "es_CL",
+    url: "/trabaja",
+    siteName: "LOGICAV",
+    title: trabaja.compartir.titulo,
+    description: trabaja.compartir.descripcion,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: trabaja.compartir.titulo,
+    description: trabaja.compartir.descripcion,
+  },
 };
 
 const uno = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";

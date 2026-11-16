@@ -211,7 +211,7 @@ export function TrabajaForm({ origen, codigo }: { origen: string; codigo: string
 
         <div>
           <label className={labelClass} htmlFor="t-tarifa">
-            Tu valor por día
+            Tu valor por día <span className="font-normal text-steel-500">(en pesos chilenos)</span>
           </label>
           <div className="flex">
             <span className="flex items-center border border-r-0 border-line bg-shell px-3 text-base text-steel-600">

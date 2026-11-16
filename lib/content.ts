@@ -388,10 +388,20 @@ export const formOptions = {
   Solo lo verdadero: nada de prometer volumen de trabajo.
 */
 export const trabaja = {
-  eyebrow: "Trabaja con nosotros · Climatización",
+  /* "Santiago, Chile" explícito (pedido de RRHH, 16-11-2026): el link se
+     comparte en grupos de Facebook con técnicos de otros países. */
+  eyebrow: "Trabaja con nosotros · Climatización · Santiago, Chile",
   titulo: ["Trabajos de climatización", "para técnicos independientes"],
   intro:
-    "Logicav hace mantenciones e instalaciones para organismos públicos: universidades, hospitales y ministerios. Estamos sumando técnicos en la Región Metropolitana.",
+    "Logicav hace mantenciones e instalaciones para organismos públicos: universidades, hospitales y ministerios. Estamos sumando técnicos en Santiago, Chile.",
+  /* Vista previa del link en Facebook y WhatsApp (Open Graph). La imagen
+     se genera en app/trabaja/opengraph-image.tsx. */
+  compartir: {
+    titulo: "Trabajos de climatización para técnicos · Santiago, Chile",
+    descripcion:
+      "Mantenciones e instalaciones para organismos públicos. Pago todos los viernes. Postula en 2 minutos.",
+    imagenPie: "Pago todos los viernes · Organismos públicos",
+  },
   /* "Cómo funciona" (16-11-2026). Regla de RRHH: no prometer volumen de
      trabajo; por eso el paso 2 dice "cuando hay". */
   pasosTitulo: "Cómo funciona",
